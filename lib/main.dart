@@ -28,19 +28,16 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            height: 160,
-            child: Image.asset("lib/assets/images/noble-logo.png"),
-          ),
-          Text(
-            "Luxury Designed Jewelry",
-            textDirection: TextDirection.ltr,
-            style: GoogleFonts.poppins(fontSize: 19),
-          ),
-        ],
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: 400,
+              child: Image.asset("lib/assets/images/noble-logo.png"),
+            ),
+          ],
+        ),
       ),
     );
   }
