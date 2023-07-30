@@ -37,10 +37,7 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size(MediaQuery
-              .of(context)
-              .size
-              .width, 100),
+          preferredSize: Size(MediaQuery.of(context).size.width, 100),
           child: NavigationBar()),
       body: Container(
         child: Padding(
@@ -54,7 +51,7 @@ class LandingPage extends StatelessWidget {
               Expanded(
                 child: Container(
                   child:
-                  SvgPicture.asset("lib/assets/images/logo-with-text.svg"),
+                      SvgPicture.asset("lib/assets/images/logo-with-text.svg"),
                 ),
               ),
               Container(
@@ -130,34 +127,51 @@ class _NavigationBarState extends State<NavigationBar> {
   }
 }
 
-class Menu extends StatelessWidget {
-  const Menu({Key? key,
-    required this.allItems,
-    required this.currentIndex,
-    required this.onIndexChange})
+class Menu extends StatefulWidget {
+  const Menu(
+      {Key? key,
+      required this.allItems,
+      required this.currentIndex,
+      required this.onIndexChange})
       : super(key: key);
   final List<MenuItem> allItems;
   final int currentIndex;
   final Function(int) onIndexChange;
 
   @override
+  State<Menu> createState() => _MenuState();
+}
+
+class _MenuState extends State<Menu> {
+
+  MenuItem? currentHoveredItem;
+
+  @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: List.generate(allItems.length, (index) {
-        final MenuItem currentItem = allItems[index];
+      children: List.generate(widget.allItems.length, (index) {
+        final MenuItem currentItem = widget.allItems[index];
         return InkWell(
-            onTap: () => onIndexChange(index),
-            child: Text(
-              currentItem.text.toUpperCase(),
-              style: TextStyle(
-                  fontWeight: currentIndex == index ? FontWeight.w900 : null,
-                  color: currentIndex == index
-                      ? Theme
-                      .of(context)
-                      .colorScheme
-                      .primary
-                      : null),
+          highlightColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+            onTap: () => widget.onIndexChange(index),
+            onHover: (val) => setState(() {
+                  val == true ? currentHoveredItem = currentItem : currentHoveredItem = null;
+            }),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: index == widget.currentIndex ? Theme.of(context).colorScheme.primary : null,
+                  border:
+                      Border.all(color: currentItem == currentHoveredItem ? Theme.of(context).colorScheme.primary : Colors.transparent)
+                      ),
+              padding: EdgeInsets.all(12),
+              child: Text(
+                currentItem.text.toUpperCase(),
+                style: TextStyle(
+                    color: index == widget.currentIndex ? Colors.white : null),
+              ),
             ));
       }),
     );
@@ -165,10 +179,10 @@ class Menu extends StatelessWidget {
 }
 
 class MenuItem {
-
   final String text;
 
-  const MenuItem({Key? key,
+  const MenuItem({
+    Key? key,
     required this.text,
   });
 }
