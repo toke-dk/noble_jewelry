@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // this page https://maketintsandshades.com/
 class Palette {
   static const MaterialColor kPrimaryMaterialColor = MaterialColor(
-    0xff2a493e, // 0% comes in here, this will be color picked if no shade is selected when defining a Color property which doesn’t require a swatch.
+    0xff3c6858, // 0% comes in here, this will be color picked if no shade is selected when defining a Color property which doesn’t require a swatch.
     <int, Color>{
       50: Color(0xff3c6858),//10%
       100: Color(0xff507769),//20%
