@@ -143,7 +143,6 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
-
   MenuItem? currentHoveredItem;
 
   @override
@@ -153,19 +152,24 @@ class _MenuState extends State<Menu> {
       children: List.generate(widget.allItems.length, (index) {
         final MenuItem currentItem = widget.allItems[index];
         return InkWell(
-          highlightColor: Colors.transparent,
-          focusColor: Colors.transparent,
-          hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            focusColor: Colors.transparent,
+            hoverColor: Colors.transparent,
             onTap: () => widget.onIndexChange(index),
             onHover: (val) => setState(() {
-                  val == true ? currentHoveredItem = currentItem : currentHoveredItem = null;
-            }),
+                  val == true
+                      ? currentHoveredItem = currentItem
+                      : currentHoveredItem = null;
+                }),
             child: Container(
               decoration: BoxDecoration(
-                  color: index == widget.currentIndex ? Theme.of(context).colorScheme.primary : null,
-                  border:
-                      Border.all(color: currentItem == currentHoveredItem ? Theme.of(context).colorScheme.primary : Colors.transparent)
-                      ),
+                  color: index == widget.currentIndex
+                      ? Theme.of(context).colorScheme.primary
+                      : null,
+                  border: Border.all(
+                      color: currentItem == currentHoveredItem
+                          ? Theme.of(context).colorScheme.primary
+                          : Colors.transparent)),
               padding: EdgeInsets.all(12),
               child: Text(
                 currentItem.text.toUpperCase(),
