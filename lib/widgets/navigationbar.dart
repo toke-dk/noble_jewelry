@@ -1,53 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:noble_jewelry/pages/about.dart';
-import 'package:noble_jewelry/pages/collections.dart';
-import 'package:noble_jewelry/pages/contact.dart';
-import 'package:noble_jewelry/pages/home.dart';
-import 'package:noble_jewelry/pages/shop.dart';
 import 'package:noble_jewelry/shared/constants.dart';
+import 'package:provider/provider.dart';
 
-enum MenuItems { home, shop, collections, about, contact }
-
-extension MenuItemsNavigator on MenuItems {
-  Widget get showPage {
-    switch (this) {
-      case MenuItems.home:
-        return const Home();
-      case MenuItems.shop:
-        return const Shop();
-      case MenuItems.collections:
-        return const Collections();
-      case MenuItems.about:
-        return const About();
-      case MenuItems.contact:
-        return const Contact();
-    }
-  }
-}
+import '../models/pageProvider.dart';
 
 class MyNavigationBar extends StatelessWidget {
-  const MyNavigationBar(
-      {Key? key,
-      required this.allItems,
-      required this.currentIndex,
-      required this.onIndexChange})
-      : super(key: key);
-  final List<MenuItems> allItems;
-  final int currentIndex;
-  final Function(int index) onIndexChange;
+  const MyNavigationBar({Key? key, required this.allPages}) : super(key: key);
+  final List<Pages> allPages;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       leadingWidth: 650,
       leading: Padding(
-          padding: const EdgeInsets.only(left: kPagePadding),
-          child: Menu(
-            allItems: allItems,
-            currentIndex: currentIndex,
-            onIndexChange: (int index) => onIndexChange(index),
-          )),
+          padding: const EdgeInsets.only(left: kPagePadding), child: Menu()),
       actions: [
         IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
         IconButton(
@@ -69,53 +36,58 @@ class MyNavigationBar extends StatelessWidget {
 }
 
 class Menu extends StatefulWidget {
-  const Menu(
-      {Key? key,
-      required this.allItems,
-      required this.currentIndex,
-      required this.onIndexChange})
-      : super(key: key);
-  final List<MenuItems> allItems;
-  final int currentIndex;
-  final Function(int) onIndexChange;
+  const Menu({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Menu> createState() => _MenuState();
 }
 
 class _MenuState extends State<Menu> {
-  MenuItems? currentHoveredItem;
+  List<Pages> allPages = Pages.values;
+
+  Pages? currentHoveredItem;
+
+  Pages getCurrentPage(context) =>
+      Provider.of<PageProvider>(context).currentPage;
+
+  void setCurrentPage(context, page) =>
+      Provider.of<PageProvider>(context, listen: false)
+          .setCurrentPage(page);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: List.generate(widget.allItems.length, (index) {
-        final MenuItems currentItem = widget.allItems[index];
+      children: List.generate(allPages.length, (index) {
+        Pages currentIndexPage = allPages[index];
         return InkWell(
             highlightColor: Colors.transparent,
             focusColor: Colors.transparent,
             hoverColor: Colors.transparent,
-            onTap: () => widget.onIndexChange(index),
+            onTap: () => setCurrentPage(context, currentIndexPage),
             onHover: (val) => setState(() {
                   val == true
-                      ? currentHoveredItem = currentItem
+                      ? currentHoveredItem = currentIndexPage
                       : currentHoveredItem = null;
                 }),
             child: Container(
               decoration: BoxDecoration(
-                  color: index == widget.currentIndex
+                  color: getCurrentPage(context) == currentIndexPage
                       ? Theme.of(context).colorScheme.primary
                       : null,
                   border: Border.all(
-                      color: currentItem == currentHoveredItem
+                      color: currentIndexPage == currentHoveredItem
                           ? Theme.of(context).colorScheme.primary
                           : Colors.transparent)),
               padding: const EdgeInsets.all(12),
               child: Text(
-                currentItem.name.toUpperCase(),
+                currentIndexPage.name.toUpperCase(),
                 style: TextStyle(
-                    color: index == widget.currentIndex ? Colors.white : null),
+                    color: currentIndexPage == getCurrentPage(context)
+                        ? Colors.white
+                        : null),
               ),
             ));
       }),
