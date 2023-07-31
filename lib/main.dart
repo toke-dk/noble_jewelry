@@ -52,6 +52,13 @@ class Content extends StatefulWidget {
 }
 
 class _ContentState extends State<Content> {
+
+  @override
+  void initState() {
+
+    super.initState();
+  }
+
   final List<Pages> allItems = Pages.values.map((e) => e).toList();
 
   int currentIndex = 0;

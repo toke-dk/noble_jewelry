@@ -15,7 +15,7 @@ extension MenuItemsNavigator on Pages {
       case Pages.shop:
         return const Shop();
       case Pages.collections:
-        return const Collections();
+        return const CollectionsPage();
       case Pages.about:
         return const About();
       case Pages.contact:

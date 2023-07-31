@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:noble_jewelry/models/collections.dart';
 import 'package:noble_jewelry/shared/buttons.dart';
 import 'package:noble_jewelry/shared/constants.dart';
+import 'package:noble_jewelry/shared/number_convert.dart';
+import '../models/product.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -144,7 +147,19 @@ class Home extends StatelessWidget {
             "Most popular".toUpperCase(),
             style: Theme.of(context).textTheme.headlineLarge,
           )),
-          const ShowProduct()
+          const SizedBox(
+            height: 23,
+          ),
+          ShowProduct(
+            product: Product(
+                image: Image.asset(
+                  "lib/assets/images/bracelets/brace5.png",
+                  height: 275,
+                ),
+                name: "Refined",
+                priceUSD: 699,
+                oldPriceUSD: 4200),
+          )
         ],
       ),
     );
@@ -152,7 +167,8 @@ class Home extends StatelessWidget {
 }
 
 class ShowProduct extends StatefulWidget {
-  const ShowProduct({Key? key}) : super(key: key);
+  const ShowProduct({Key? key, required this.product}) : super(key: key);
+  final Product product;
 
   @override
   State<ShowProduct> createState() => _ShowProductState();
@@ -168,78 +184,87 @@ class _ShowProductState extends State<ShowProduct> {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Positioned(
-            left: 0,
-            top: 0,
-            child: Container(
-              color: Theme.of(context).colorScheme.primary,
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
-              child: Text(
-                "Label",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .copyWith(color: Colors.white),
-              ),
-            ),
-          ),
+          widget.product.label != null
+              ? Positioned(
+                  left: 0,
+                  top: 0,
+                  child: Container(
+                    color: Theme.of(context).colorScheme.primary,
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+                    child: Text(
+                      widget.product.label!.getName,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: Colors.white),
+                    ),
+                  ),
+                )
+              : const SizedBox(),
           Positioned(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 28),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Center(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 2, horizontal: 12),
-                      width: 134,
-                      height: 21,
-                      decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                          borderRadius: BorderRadius.circular(12)),
-                      child: Center(
-                          child: Text(
-                        "Collection name",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      )),
-                    ),
-                  ),
-                  Image.asset(
-                    "lib/assets/images/bracelets/brace5.png",
-                    height: 275,
-                  ),
+                  widget.product.collections != null
+                      ? Center(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 2, horizontal: 12),
+                            width: 134,
+                            height: 21,
+                            decoration: BoxDecoration(
+                                color: Colors.grey[100],
+                                borderRadius: BorderRadius.circular(12)),
+                            child: Center(
+                                child: Text(
+                              widget.product.collections!.getName,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            )),
+                          ),
+                        )
+                      : const SizedBox(),
+                  widget.product.image,
                   const SizedBox(
                     height: 45,
                   ),
-                  const Text("Name"),
+                  Text(widget.product.name,style: Theme.of(context).textTheme.headlineSmall,),
                   const SizedBox(
                     height: 8,
                   ),
                   Row(
                     children: [
                       Text(
-                        "Old price",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall!
-                            .copyWith(decoration: TextDecoration.lineThrough),
+                        widget.product.priceUSD.convertDoublePriceToString,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const SizedBox(
-                        width: 15,
+                        width: 4,
                       ),
-                      Text(
-                        "New Price",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      )
+                      widget.product.oldPriceUSD != null
+                          ? Text(
+                              widget.product.oldPriceUSD!
+                                  .convertDoublePriceToString,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(
+                                      decoration: TextDecoration.lineThrough),
+                            )
+                          : const SizedBox(),
+
+
                     ],
                   ),
                   const SizedBox(
                     height: 8,
                   ),
                   PrimaryButton(
-                    icon: Icons.shopping_basket,
-                    text: 'Shop Now'.toUpperCase(), onTap: () {  },
+                    outlined: true,
+                    text: 'See more'.toUpperCase(),
+                    onTap: () {},
                   ),
                 ],
               ),
