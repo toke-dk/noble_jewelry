@@ -11,24 +11,30 @@ class MyNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      leadingWidth: 650,
-      leading: Padding(
-          padding: const EdgeInsets.only(left: kPagePadding), child: Menu()),
-      actions: [
-        IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-        IconButton(
-            onPressed: () {}, icon: const Icon(Icons.shopping_basket_rounded)),
-        IconButton(onPressed: () {}, icon: const Icon(Icons.person)),
-        const SizedBox(
-          width: kPagePadding,
-        )
-      ],
-      title: Row(
+    return Container(
+      padding: const EdgeInsets.only(left: kPagePadding, right: kPagePadding),
+      child: Stack(
+        alignment: Alignment.center,
         children: [
+          const Positioned(
+            left: 0,
+            child: Menu(),
+          ),
+          Positioned(
+            right: 0,
+            child: Row(
+              children: [
+                IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+                IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.shopping_basket_rounded)),
+                IconButton(onPressed: () {}, icon: const Icon(Icons.person)),
+              ],
+            ),
+          ),
           Container(
-              height: 100,
-              child: SvgPicture.asset("lib/assets/images/logo/logo-and-name.svg")),
+              child: SvgPicture.asset(
+                  "lib/assets/images/logo/logo-and-name.svg")),
         ],
       ),
     );
@@ -53,8 +59,7 @@ class _MenuState extends State<Menu> {
       Provider.of<PageProvider>(context).currentPage;
 
   void setCurrentPage(context, page) =>
-      Provider.of<PageProvider>(context, listen: false)
-          .setCurrentPage(page);
+      Provider.of<PageProvider>(context, listen: false).setCurrentPage(page);
 
   @override
   Widget build(BuildContext context) {
