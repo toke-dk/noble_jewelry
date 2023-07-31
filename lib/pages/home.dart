@@ -184,9 +184,12 @@ class HorizontalProductScroll extends StatelessWidget {
 
   final List<Product> products = [
     Product(
+      label: Labels.soldOut,
+        collections: Collections.theBeginning,
+        oldPriceUSD: 1299,
         image: Image.asset("lib/assets/images/bracelets/brace5.png"),
         name: "a",
-        priceUSD: 1),
+        priceUSD: 999),
     Product(
         image: Image.asset("lib/assets/images/bracelets/brace6.png"),
         name: "b",
@@ -271,20 +274,20 @@ class _ShowProductState extends State<ShowProduct> {
         constraints: const BoxConstraints(
           maxWidth: 300,
           minWidth: 300,
-          maxHeight: 520,
-          minHeight: 520,
+          maxHeight: 540,
+          minHeight: 540,
         ),
         child: Stack(
           alignment: Alignment.center,
           children: [
             widget.product.label != null
                 ? Positioned(
-                    left: 10,
-                    top: 10,
+                    left: 20,
+                    top: 20,
                     child: Container(
                       decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.primary,
-                          borderRadius: BorderRadius.circular(7)),
+                          ),
                       padding:
                           const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
                       child: Text(
@@ -299,9 +302,10 @@ class _ShowProductState extends State<ShowProduct> {
                 : const SizedBox(),
             Positioned(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 28),
+                padding: const EdgeInsets.only(top: 55, bottom: 30, right: 20,left: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     widget.product.collections != null
                         ? Center(
