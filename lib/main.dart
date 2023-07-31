@@ -55,6 +55,6 @@ class _ContentState extends State<Content> {
             child: MyNavigationBar(
               allPages: allItems,
             )),
-        body: Provider.of<PageProvider>(context).currentPage.showPage);
+        body: SingleChildScrollView(child: Provider.of<PageProvider>(context).currentPage.showPage));
   }
 }
