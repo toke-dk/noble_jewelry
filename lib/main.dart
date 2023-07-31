@@ -15,9 +15,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => PageProvider())
-      ],
+      providers: [ChangeNotifierProvider(create: (context) => PageProvider())],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -51,10 +49,11 @@ class _ContentState extends State<Content> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-            preferredSize: Size(0, 100),
+            preferredSize: const Size.fromHeight(100),
             child: MyNavigationBar(
               allPages: allItems,
             )),
-        body: SingleChildScrollView(child: Provider.of<PageProvider>(context).currentPage.showPage));
+        body: SingleChildScrollView(
+            child: Provider.of<PageProvider>(context).currentPage.showPage));
   }
 }

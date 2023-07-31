@@ -32,9 +32,7 @@ class MyNavigationBar extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-              child: SvgPicture.asset(
-                  "lib/assets/images/logo/logo-and-name.svg")),
+          SvgPicture.asset("lib/assets/images/logo/logo-and-name.svg"),
         ],
       ),
     );
