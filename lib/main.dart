@@ -20,6 +20,7 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
           fontFamily: GoogleFonts.hind().fontFamily,
           textTheme: const TextTheme(
               bodyMedium: TextStyle(

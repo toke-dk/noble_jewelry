@@ -77,15 +77,16 @@ class Home extends StatelessWidget {
             height: contentSpacing,
           ),
           Center(
-            child: ConstrainedBox(
+            child: Container(
+              height: 460,
               constraints: BoxConstraints(maxWidth: 800),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Flexible(
                     child: Container(
                       width: 400,
-                      height: 460,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -108,7 +109,17 @@ class Home extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Image.asset("lib/assets/images/bracelets/brace2.png"),
+                  Container(
+                    width: 350,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Positioned(right: 0, top: 12, child: Image.asset("lib/assets/images/bracelets/brace3.png")),
+                        Positioned(left: 0, top: 0, child: Image.asset("lib/assets/images/bracelets/brace4.png")),
+                        Positioned(left: 6, bottom: 8, child: Image.asset("lib/assets/images/bracelets/brace2.png")),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
