@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:footer/footer.dart';
+import 'package:footer/footer_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:noble_jewelry/models/pageProvider.dart';
 import 'package:noble_jewelry/shared/color_palette.dart';
@@ -21,7 +23,12 @@ class MainApp extends StatelessWidget {
       providers: [ChangeNotifierProvider(create: (context) => PageProvider())],
       child: MaterialApp(
         scrollBehavior: MaterialScrollBehavior().copyWith(
-          dragDevices: {PointerDeviceKind.mouse, PointerDeviceKind.touch, PointerDeviceKind.stylus, PointerDeviceKind.unknown},
+          dragDevices: {
+            PointerDeviceKind.mouse,
+            PointerDeviceKind.touch,
+            PointerDeviceKind.stylus,
+            PointerDeviceKind.unknown
+          },
         ),
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -57,10 +64,8 @@ class Content extends StatefulWidget {
 }
 
 class _ContentState extends State<Content> {
-
   @override
   void initState() {
-
     super.initState();
   }
 
@@ -77,7 +82,24 @@ class _ContentState extends State<Content> {
             child: MyNavigationBar(
               allPages: allItems,
             )),
-        body: SingleChildScrollView(
-            child: Provider.of<PageProvider>(context).currentPage.showPage));
+        body: FooterView(
+          footer: Footer(
+            child: Container(
+              height: 100,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text("FOLOW US",style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),),
+                  Text("home | about | contact".toUpperCase(),style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),),
+                  Text("@2023 Noble - Men’s fashion bracelets",style: TextStyle(color: Theme.of(context).colorScheme.tertiary),)
+                ],
+              ),
+            ),
+            backgroundColor: Colors.black,
+          ),
+          children: [
+            Provider.of<PageProvider>(context).currentPage.showPage,
+          ],
+        ));
   }
 }
