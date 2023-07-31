@@ -10,7 +10,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(Theme.of(context).textTheme.bodySmall!.fontSize.toString());
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: kPagePadding),
       child: Column(
@@ -53,11 +52,11 @@ class Home extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Nature's finesse on your wrist",
+                            "Nature's finesse on your wrist".toUpperCase(),
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                           Text(
-                            "Explore Our High-Quality Wood Bracelets",
+                            "Explore Our High-Quality Wooden Bracelets".toUpperCase(),
                             overflow: TextOverflow.clip,
                             style: Theme.of(context).textTheme.headlineLarge,
                           ),
@@ -78,7 +77,7 @@ class Home extends StatelessWidget {
           ),
           Center(
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 1100),
+              constraints: BoxConstraints(maxWidth: 800),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -91,13 +90,13 @@ class Home extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Collection '' comming soon",
+                            'Collection "시작" comming soon',
                             style: Theme.of(context).textTheme.headlineLarge,
                           ),
                           Text(
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla",
                             overflow: TextOverflow.clip,
-                            style: Theme.of(context).textTheme.bodySmall,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           PrimaryButton(
                             outlined: true,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:noble_jewelry/models/pageProvider.dart';
 import 'package:noble_jewelry/shared/color_palette.dart';
 import 'package:noble_jewelry/widgets/navigationbar.dart';
@@ -19,6 +20,11 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
+          fontFamily: GoogleFonts.hind().fontFamily,
+          textTheme: const TextTheme(
+            bodyMedium: TextStyle(letterSpacing: 1.5, fontSize: 16, fontWeight: FontWeight.w100),
+            headlineLarge: TextStyle(color: Colors.black,)
+          ),
           appBarTheme: const AppBarTheme(
               toolbarHeight: 110,
               centerTitle: true,
@@ -47,6 +53,7 @@ class _ContentState extends State<Content> {
 
   @override
   Widget build(BuildContext context) {
+    print(Theme.of(context).textTheme.bodyLarge!.fontSize);
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(100),
