@@ -38,7 +38,7 @@ class Home extends StatelessWidget {
           ),
           Center(
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 1100),
+              constraints: const BoxConstraints(maxWidth: 1100),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -79,7 +79,7 @@ class Home extends StatelessWidget {
           Center(
             child: Container(
               height: 460,
-              constraints: BoxConstraints(maxWidth: 800),
+              constraints: const BoxConstraints(maxWidth: 800),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -114,9 +114,21 @@ class Home extends StatelessWidget {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        Positioned(right: 0, top: 12, child: Image.asset("lib/assets/images/bracelets/brace3.png")),
-                        Positioned(left: 0, top: 0, child: Image.asset("lib/assets/images/bracelets/brace4.png")),
-                        Positioned(left: 6, bottom: 8, child: Image.asset("lib/assets/images/bracelets/brace2.png")),
+                        Positioned(
+                            right: 0,
+                            top: 12,
+                            child: Image.asset(
+                                "lib/assets/images/bracelets/brace3.png")),
+                        Positioned(
+                            left: 0,
+                            top: 0,
+                            child: Image.asset(
+                                "lib/assets/images/bracelets/brace4.png")),
+                        Positioned(
+                            left: 6,
+                            bottom: 8,
+                            child: Image.asset(
+                                "lib/assets/images/bracelets/brace2.png")),
                       ],
                     ),
                   ),
@@ -124,6 +136,115 @@ class Home extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(
+            height: contentSpacing,
+          ),
+          Center(
+              child: Text(
+            "Most popular".toUpperCase(),
+            style: Theme.of(context).textTheme.headlineLarge,
+          )),
+          const ShowProduct()
+        ],
+      ),
+    );
+  }
+}
+
+class ShowProduct extends StatefulWidget {
+  const ShowProduct({Key? key}) : super(key: key);
+
+  @override
+  State<ShowProduct> createState() => _ShowProductState();
+}
+
+class _ShowProductState extends State<ShowProduct> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      width: 300,
+      height: 558,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            left: 0,
+            top: 0,
+            child: Container(
+              color: Theme.of(context).colorScheme.primary,
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+              child: Text(
+                "Label",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall!
+                    .copyWith(color: Colors.white),
+              ),
+            ),
+          ),
+          Positioned(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 28),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Center(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 2, horizontal: 12),
+                      width: 134,
+                      height: 21,
+                      decoration: BoxDecoration(
+                          color: Colors.grey[100],
+                          borderRadius: BorderRadius.circular(12)),
+                      child: Center(
+                          child: Text(
+                        "Collection name",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )),
+                    ),
+                  ),
+                  Image.asset(
+                    "lib/assets/images/bracelets/brace5.png",
+                    height: 275,
+                  ),
+                  const SizedBox(
+                    height: 45,
+                  ),
+                  const Text("Name"),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "Old price",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall!
+                            .copyWith(decoration: TextDecoration.lineThrough),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Text(
+                        "New Price",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  PrimaryButton(
+                    icon: Icons.shopping_basket,
+                    text: 'Shop Now'.toUpperCase(), onTap: () {  },
+                  ),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
