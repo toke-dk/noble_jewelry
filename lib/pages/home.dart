@@ -161,12 +161,12 @@ class Home extends StatelessWidget {
               )),
               Center(
                   child: Text(
-                    "Discover the Irresistible Favorites: Unmatched in Quality and Admired by All!",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(color: Theme.of(context).colorScheme.onPrimary),
-                  )),
+                "Discover the Irresistible Favorites: Unmatched in Quality and Admired by All!",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+              )),
               const SizedBox(
                 height: 30,
               ),
@@ -174,6 +174,67 @@ class Home extends StatelessWidget {
             ],
           ),
         ),
+        Center(
+          child: Container(
+            height: 1000,
+            width: 1100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  child: Container(
+                    width: 500,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "About Us".toUpperCase(),
+                              style: Theme.of(context).textTheme.headlineLarge,
+                            ),
+                            PrimaryButton(text: "About page".toUpperCase(), onTap: (){})
+                          ],
+                        ),
+                        SizedBox(height: 22,),
+                        Text(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla"),
+                        SizedBox(height: 40,),
+                        Image.asset("lib/assets/images/about_images/woodcraft.png")
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 500,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset("lib/assets/images/about_images/handshake.png"),
+                      SizedBox(height: 40,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Contact Us".toUpperCase(),
+                            style: Theme.of(context).textTheme.headlineLarge,
+                          ),
+                          PrimaryButton(text: "Contact page".toUpperCase(), onTap: (){})
+                        ],
+                      ),
+                      SizedBox(height: 22,),
+                      Text(
+                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla"),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        )
       ],
     );
   }
@@ -184,7 +245,7 @@ class HorizontalProductScroll extends StatelessWidget {
 
   final List<Product> products = [
     Product(
-      label: Labels.soldOut,
+        label: Labels.soldOut,
         collections: Collections.theBeginning,
         oldPriceUSD: 1299,
         image: Image.asset("lib/assets/images/bracelets/brace5.png"),
@@ -286,10 +347,10 @@ class _ShowProductState extends State<ShowProduct> {
                     top: 20,
                     child: Container(
                       decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary,
-                          ),
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 12),
                       child: Text(
                         widget.product.label!.getName,
                         style: Theme.of(context)
@@ -302,7 +363,8 @@ class _ShowProductState extends State<ShowProduct> {
                 : const SizedBox(),
             Positioned(
               child: Padding(
-                padding: const EdgeInsets.only(top: 55, bottom: 30, right: 20,left: 20),
+                padding: const EdgeInsets.only(
+                    top: 55, bottom: 30, right: 20, left: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.end,
