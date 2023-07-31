@@ -24,12 +24,10 @@ class _PrimaryButtonState extends State<PrimaryButton> {
         ? Theme.of(context).primaryColor
         : Colors.transparent;
 
-    Color primaryTextColor = primaryColor == Colors.transparent
-        ? Colors.white
-        : primaryColor;
-    Color secondaryTextColor = secondaryColor == Colors.transparent
-        ? Colors.white
-        : secondaryColor;
+    Color primaryTextColor =
+        primaryColor == Colors.transparent ? Colors.white : primaryColor;
+    Color secondaryTextColor =
+        secondaryColor == Colors.transparent ? Colors.white : secondaryColor;
 
     return InkWell(
         highlightColor: Colors.transparent,
@@ -48,9 +46,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
           child: Text(
             widget.text,
             style: TextStyle(
-                color: doesHover
-                    ? primaryTextColor
-                    : secondaryTextColor),
+                color: doesHover ? primaryTextColor : secondaryTextColor),
           ),
         ));
   }

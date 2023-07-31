@@ -22,9 +22,13 @@ class MainApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: GoogleFonts.hind().fontFamily,
           textTheme: const TextTheme(
-            bodyMedium: TextStyle(letterSpacing: 1.5, fontSize: 16, fontWeight: FontWeight.w100),
-            headlineLarge: TextStyle(color: Colors.black,)
-          ),
+              bodyMedium: TextStyle(
+                  letterSpacing: 1.5,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w100),
+              headlineLarge: TextStyle(
+                color: Colors.black,
+              )),
           appBarTheme: const AppBarTheme(
               toolbarHeight: 110,
               centerTitle: true,

@@ -56,7 +56,8 @@ class Home extends StatelessWidget {
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                           Text(
-                            "Explore Our High-Quality Wooden Bracelets".toUpperCase(),
+                            "Explore Our High-Quality Wooden Bracelets"
+                                .toUpperCase(),
                             overflow: TextOverflow.clip,
                             style: Theme.of(context).textTheme.headlineLarge,
                           ),
@@ -84,7 +85,7 @@ class Home extends StatelessWidget {
                   Flexible(
                     child: Container(
                       width: 400,
-                      height: 400,
+                      height: 460,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
