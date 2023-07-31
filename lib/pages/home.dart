@@ -159,6 +159,14 @@ class Home extends StatelessWidget {
                     .headlineLarge!
                     .copyWith(color: Theme.of(context).colorScheme.onPrimary),
               )),
+              Center(
+                  child: Text(
+                    "Discover the Irresistible Favorites: Unmatched in Quality and Admired by All!",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+                  )),
               const SizedBox(
                 height: 30,
               ),
@@ -351,7 +359,7 @@ class _ShowProductState extends State<ShowProduct> {
                     ),
                     PrimaryButton(
                       outlined: true,
-                      text: 'See more'.toUpperCase(),
+                      text: 'Discover'.toUpperCase(),
                       onTap: () {},
                     ),
                   ],
