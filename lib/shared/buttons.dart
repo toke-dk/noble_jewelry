@@ -67,12 +67,10 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                     )
                   : const SizedBox(),
               Text(
-                      widget.text,
-                      style: TextStyle(
-                          color: doesHover
-                              ? primaryTextColor
-                              : secondaryTextColor),
-                    ),
+                widget.text,
+                style: TextStyle(
+                    color: doesHover ? primaryTextColor : secondaryTextColor),
+              ),
             ],
           ),
         ));
