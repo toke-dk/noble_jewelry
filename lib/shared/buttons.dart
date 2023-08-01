@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class PrimaryButton extends StatefulWidget {
   const PrimaryButton(
@@ -38,11 +39,12 @@ class _PrimaryButtonState extends State<PrimaryButton> {
         highlightColor: Colors.transparent,
         focusColor: Colors.transparent,
         hoverColor: Colors.transparent,
-        onTap: () => widget.onTap,
+        onTap: widget.onTap,
         onHover: (val) => setState(() {
               doesHover = val;
             }),
-        child: Container(
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
           decoration: BoxDecoration(
               color: !doesHover ? primaryColor : secondaryColor,
               border:
