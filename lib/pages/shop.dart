@@ -45,7 +45,7 @@ class Shop extends StatelessWidget {
                       TextSpan(text: "Products")
                     ]),
               ),
-              PrimaryButton(text: "Filter", onTap: () {}, icon: Icons.tune),
+              PrimaryButton(text: "Filter", onTap: () {}, icon: Icons.tune, outlined: true,),
             ],
           ),
           const Divider(height: 50,),
