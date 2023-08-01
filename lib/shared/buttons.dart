@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 class PrimaryButton extends StatefulWidget {
-  const PrimaryButton(
-      {Key? key,
-      required this.text,
-      required this.onTap,
-      this.outlined,
-      this.icon,
-      this.onlyUnderline,
-      this.initUnderline})
+  const PrimaryButton({Key? key,
+    required this.text,
+    required this.onTap,
+    this.outlined,
+    this.icon,
+    this.onlyUnderline,
+    this.initUnderline})
       : super(key: key);
   final String text;
   final Function() onTap;
@@ -29,14 +28,29 @@ class _PrimaryButtonState extends State<PrimaryButton> {
   late Color borderColor;
 
   late final Color initBackGroundColor = widget.outlined == true
-      ? Theme.of(context).colorScheme.inversePrimary
-      : Theme.of(context).colorScheme.primary;
+      ? Theme
+      .of(context)
+      .colorScheme
+      .inversePrimary
+      : Theme
+      .of(context)
+      .colorScheme
+      .primary;
   late final Color initForeGroundColor = widget.outlined == true
-      ? Theme.of(context).colorScheme.primary
-      : Theme.of(context).colorScheme.inversePrimary;
+      ? Theme
+      .of(context)
+      .colorScheme
+      .primary
+      : Theme
+      .of(context)
+      .colorScheme
+      .inversePrimary;
   late final Color initBorderColor = widget.outlined != true
       ? Colors.transparent
-      : Theme.of(context).colorScheme.primary;
+      : Theme
+      .of(context)
+      .colorScheme
+      .primary;
 
   @override
   void didChangeDependencies() {
@@ -44,7 +58,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
     backGroundColor = initBackGroundColor;
     foreGroundColor = initForeGroundColor;
     borderColor =
-        widget.onlyUnderline == true ? Colors.transparent : initBorderColor;
+    widget.onlyUnderline == true ? Colors.transparent : initBorderColor;
   }
 
   void callOnHover(BuildContext context, bool newHoverValue) {
@@ -53,12 +67,12 @@ class _PrimaryButtonState extends State<PrimaryButton> {
         backGroundColor = initForeGroundColor;
         foreGroundColor = initBackGroundColor;
         borderColor =
-            widget.outlined == true ? Colors.transparent : initBackGroundColor;
+        widget.outlined == true ? Colors.transparent : initBackGroundColor;
       } else {
         backGroundColor = initBackGroundColor;
         foreGroundColor = initForeGroundColor;
         borderColor =
-            widget.outlined == true ? initForeGroundColor : Colors.transparent;
+        widget.outlined == true ? initForeGroundColor : Colors.transparent;
       }
       setState(() {
         backGroundColor;
@@ -72,25 +86,51 @@ class _PrimaryButtonState extends State<PrimaryButton> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-        onTap: widget.onTap,
-        onHover: (val) {
-          callOnHover(context, val);
-          setState(() {
-            onHover = val;
-          });
-        },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          decoration: BoxDecoration(
-              color: backGroundColor, border: Border.all(color: borderColor)),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
+    return IntrinsicWidth(
+      child: IntrinsicHeight(
+        child: InkWell(
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          onTap: widget.onTap,
+          onHover: (val) {
+            callOnHover(context, val);
+            setState(() {
+              onHover = val;
+            });
+          },
+          child: Stack(
             children: [
-              widget.icon != null
-                  ? Row(
+              Container(
+                decoration: BoxDecoration(
+                  color: initBackGroundColor,
+
+                ),
+                width: double.infinity,
+                height: double.infinity,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: initForeGroundColor,
+
+                ),
+                width: double.infinity,
+                height: double.infinity,
+              ).animate(target: onHover ? 1 : 0,).scaleY(duration: 1.seconds),
+
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    border: Border.all(color: borderColor)
+                    ),
+                padding:
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    widget.icon != null
+                        ? Row(
                       children: [
                         Icon(
                           widget.icon,
@@ -101,38 +141,51 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                         )
                       ],
                     )
-                  : const SizedBox(),
-              IntrinsicWidth(
-                stepWidth: 0,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      widget.text,
-                      style: TextStyle(
-                          color: foreGroundColor,
-                          fontWeight: widget.initUnderline == true
-                              ? FontWeight.bold
-                              : null),
-                    ),
-                    widget.onlyUnderline == true
-                        ? Container(
-                            height: 2,
-                            color: Theme.of(context).colorScheme.primary
+                        : const SizedBox(),
+                    IntrinsicWidth(
+                      stepWidth: 0,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            widget.text,
+                            style: TextStyle(
+                                color: foreGroundColor,
+                                fontWeight: widget.initUnderline == true
+                                    ? FontWeight.bold
+                                    : null),
+                          ),
+                          widget.onlyUnderline == true
+                              ? Container(
+                              height: 2,
+                              color: Theme
+                                  .of(context)
+                                  .colorScheme
+                                  .primary)
+                              .animate(
+                            target: widget.initUnderline == true ||
+                                onHover
+                                ? 1
+                                : 0,
                           )
-                            .animate(
-                              target: widget.initUnderline == true || onHover
-                                  ? 1
-                                  : 0,
-                            ).tint(color: Theme.of(context).colorScheme.primary)
-                            .scaleX(
-                                duration: 90.milliseconds, delay: 100.milliseconds)
-                        : SizedBox()
+                              .tint(
+                              color: Theme
+                                  .of(context)
+                                  .colorScheme
+                                  .primary)
+                              .scaleX(
+                              duration: 90.milliseconds,
+                              delay: 100.milliseconds)
+                              : SizedBox()
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
-          ),
-        ));
+          ),),
+      ),
+    );
   }
 }
