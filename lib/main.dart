@@ -77,7 +77,7 @@ class _ContentState extends State<Content> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(100),
+            preferredSize: const Size.fromHeight(150),
             child: MyNavigationBar(
               allPages: allItems,
             )),

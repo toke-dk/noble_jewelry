@@ -12,7 +12,7 @@ class MyNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: kPagePadding, right: kPagePadding),
+      padding: const EdgeInsets.only(left: kPagePadding, right: kPagePadding, bottom: 50),
       child: Stack(
         alignment: Alignment.center,
         children: [

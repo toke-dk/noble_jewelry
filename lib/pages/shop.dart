@@ -14,9 +14,6 @@ class Shop extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: kPagePadding),
       child: Column(
         children: [
-          const SizedBox(
-            height: 50,
-          ),
           Text(
             "shop".toUpperCase(),
             style: Theme.of(context)
