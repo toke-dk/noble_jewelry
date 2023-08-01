@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:noble_jewelry/models/collections.dart';
 
 import '../models/product.dart';
 
 const double kPagePadding = 100;
+
+final Duration kAnimationSpeed = 120.milliseconds;
+
+final Duration kAnimationDelay = 70.milliseconds;
 
 final List<Product> exampleProducts = [
   Product(

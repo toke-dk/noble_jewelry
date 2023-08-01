@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:noble_jewelry/shared/variables.dart';
 
 class PrimaryButton extends StatefulWidget {
   const PrimaryButton(
@@ -84,20 +85,24 @@ class _PrimaryButtonState extends State<PrimaryButton> {
           },
           child: Stack(
             children: [
-              Container(
-                color: initBackGroundColor,
-                width: double.infinity,
-                height: double.infinity,
-              ),
-              Container(
-                color: initForeGroundColor,
-                width: double.infinity,
-                height: double.infinity,
-              )
-                  .animate(
-                    target: onHover ? 1 : 0,
-                  )
-                  .scaleY(duration: 90.milliseconds),
+              widget.onlyUnderline != true
+                  ? Container(
+                      color: initBackGroundColor,
+                      width: double.infinity,
+                      height: double.infinity,
+                    )
+                  : const SizedBox.shrink(),
+              widget.onlyUnderline != true
+                  ? Container(
+                      color: initForeGroundColor,
+                      width: double.infinity,
+                      height: double.infinity,
+                    )
+                      .animate(
+                        target: onHover ? 1 : 0,
+                      )
+                      .scaleY(duration: kAnimationSpeed, delay: kAnimationDelay)
+                  : const SizedBox.shrink(),
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(),
@@ -148,8 +153,8 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                                       color:
                                           Theme.of(context).colorScheme.primary)
                                   .scaleX(
-                                      duration: 90.milliseconds,
-                                      delay: 100.milliseconds)
+                                      duration: kAnimationSpeed,
+                                      delay: kAnimationDelay)
                               : SizedBox()
                         ],
                       ),
@@ -157,13 +162,13 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                   ],
                 ),
               ),
-              Container(
+              widget.onlyUnderline != true ? Container(
                 decoration: BoxDecoration(
                     color: Colors.transparent,
                     border: Border.all(color: initBorderColor)),
                 width: double.infinity,
                 height: double.infinity,
-              ),
+              ) : const SizedBox.shrink(),
             ],
           ),
         ),
