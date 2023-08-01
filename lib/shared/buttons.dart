@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 class PrimaryButton extends StatefulWidget {
-  const PrimaryButton({Key? key,
-    required this.text,
-    required this.onTap,
-    this.outlined,
-    this.icon,
-    this.onlyUnderline,
-    this.initUnderline})
+  const PrimaryButton(
+      {Key? key,
+      required this.text,
+      required this.onTap,
+      this.outlined,
+      this.icon,
+      this.onlyUnderline,
+      this.initUnderline})
       : super(key: key);
   final String text;
   final Function() onTap;
@@ -28,37 +29,19 @@ class _PrimaryButtonState extends State<PrimaryButton> {
   late Color borderColor;
 
   late final Color initBackGroundColor = widget.outlined == true
-      ? Theme
-      .of(context)
-      .colorScheme
-      .inversePrimary
-      : Theme
-      .of(context)
-      .colorScheme
-      .primary;
+      ? Theme.of(context).colorScheme.inversePrimary
+      : Theme.of(context).colorScheme.primary;
   late final Color initForeGroundColor = widget.outlined == true
-      ? Theme
-      .of(context)
-      .colorScheme
-      .primary
-      : Theme
-      .of(context)
-      .colorScheme
-      .inversePrimary;
-  late final Color initBorderColor = widget.outlined != true
-      ? Colors.transparent
-      : Theme
-      .of(context)
-      .colorScheme
-      .primary;
+      ? Theme.of(context).colorScheme.primary
+      : Theme.of(context).colorScheme.inversePrimary;
+  late final Color initBorderColor = Theme.of(context).colorScheme.primary;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     backGroundColor = initBackGroundColor;
     foreGroundColor = initForeGroundColor;
-    borderColor =
-    widget.onlyUnderline == true ? Colors.transparent : initBorderColor;
+    borderColor = initBorderColor;
   }
 
   void callOnHover(BuildContext context, bool newHoverValue) {
@@ -67,12 +50,12 @@ class _PrimaryButtonState extends State<PrimaryButton> {
         backGroundColor = initForeGroundColor;
         foreGroundColor = initBackGroundColor;
         borderColor =
-        widget.outlined == true ? Colors.transparent : initBackGroundColor;
+            widget.outlined == true ? Colors.transparent : initBackGroundColor;
       } else {
         backGroundColor = initBackGroundColor;
         foreGroundColor = initForeGroundColor;
         borderColor =
-        widget.outlined == true ? initForeGroundColor : Colors.transparent;
+            widget.outlined == true ? initForeGroundColor : Colors.transparent;
       }
       setState(() {
         backGroundColor;
@@ -102,45 +85,40 @@ class _PrimaryButtonState extends State<PrimaryButton> {
           child: Stack(
             children: [
               Container(
-                decoration: BoxDecoration(
-                  color: initBackGroundColor,
-
-                ),
+                color: initBackGroundColor,
                 width: double.infinity,
                 height: double.infinity,
               ),
               Container(
-                decoration: BoxDecoration(
-                  color: initForeGroundColor,
-
-                ),
+                color: initForeGroundColor,
                 width: double.infinity,
                 height: double.infinity,
-              ).animate(target: onHover ? 1 : 0,).scaleY(duration: 1.seconds),
-
+              )
+                  .animate(
+                    target: onHover ? 1 : 0,
+                  )
+                  .scaleY(duration: 90.milliseconds),
               Container(
                 width: double.infinity,
-                decoration: BoxDecoration(
-                    border: Border.all(color: borderColor)
-                    ),
+                decoration: BoxDecoration(),
                 padding:
-                const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     widget.icon != null
                         ? Row(
-                      children: [
-                        Icon(
-                          widget.icon,
-                          color: foreGroundColor,
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        )
-                      ],
-                    )
+                            children: [
+                              Icon(
+                                widget.icon,
+                                color: foreGroundColor,
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              )
+                            ],
+                          )
                         : const SizedBox(),
                     IntrinsicWidth(
                       stepWidth: 0,
@@ -157,25 +135,21 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                           ),
                           widget.onlyUnderline == true
                               ? Container(
-                              height: 2,
-                              color: Theme
-                                  .of(context)
-                                  .colorScheme
-                                  .primary)
-                              .animate(
-                            target: widget.initUnderline == true ||
-                                onHover
-                                ? 1
-                                : 0,
-                          )
-                              .tint(
-                              color: Theme
-                                  .of(context)
-                                  .colorScheme
-                                  .primary)
-                              .scaleX(
-                              duration: 90.milliseconds,
-                              delay: 100.milliseconds)
+                                      height: 2,
+                                      color:
+                                          Theme.of(context).colorScheme.primary)
+                                  .animate(
+                                    target:
+                                        widget.initUnderline == true || onHover
+                                            ? 1
+                                            : 0,
+                                  )
+                                  .tint(
+                                      color:
+                                          Theme.of(context).colorScheme.primary)
+                                  .scaleX(
+                                      duration: 90.milliseconds,
+                                      delay: 100.milliseconds)
                               : SizedBox()
                         ],
                       ),
@@ -183,8 +157,16 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                   ],
                 ),
               ),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(color: initBorderColor)),
+                width: double.infinity,
+                height: double.infinity,
+              ),
             ],
-          ),),
+          ),
+        ),
       ),
     );
   }
