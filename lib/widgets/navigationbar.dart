@@ -95,7 +95,7 @@ class _MenuState extends State<Menu> {
                           : Colors.transparent)),
               padding: const EdgeInsets.all(12),
               child: Text(
-                currentIndexPage.name.toUpperCase(),
+                currentIndexPage.getName.toUpperCase(),
                 style: TextStyle(
                     color: currentIndexPage == getCurrentPage(context)
                         ? Colors.white

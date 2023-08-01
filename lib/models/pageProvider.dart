@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:noble_jewelry/pages/about.dart';
-import 'package:noble_jewelry/pages/collections.dart';
+import 'package:noble_jewelry/pages/stories.dart';
 import 'package:noble_jewelry/pages/contact.dart';
 import 'package:noble_jewelry/pages/home.dart';
 import 'package:noble_jewelry/pages/shop.dart';
 
-enum Pages { home, shop, collections, about, contact }
+enum Pages { home, shop, about, stories, contactUs }
 
 extension MenuItemsNavigator on Pages {
   Widget get showPage {
@@ -14,12 +14,27 @@ extension MenuItemsNavigator on Pages {
         return const Home();
       case Pages.shop:
         return const Shop();
-      case Pages.collections:
-        return const CollectionsPage();
+      case Pages.stories:
+        return const Stories();
       case Pages.about:
         return const About();
-      case Pages.contact:
+      case Pages.contactUs:
         return const Contact();
+    }
+  }
+
+  String get getName {
+    switch (this) {
+      case Pages.home:
+        return "Home";
+      case Pages.shop:
+        return "Shop";
+      case Pages.stories:
+        return "Stories";
+      case Pages.about:
+        return "About";
+      case Pages.contactUs:
+        return "Contact Us";
     }
   }
 }
