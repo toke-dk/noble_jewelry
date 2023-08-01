@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => PageProvider())],
       child: MaterialApp(
-        scrollBehavior: MaterialScrollBehavior().copyWith(
+        scrollBehavior: const MaterialScrollBehavior().copyWith(
           dragDevices: {
             PointerDeviceKind.mouse,
             PointerDeviceKind.touch,
@@ -75,7 +75,6 @@ class _ContentState extends State<Content> {
 
   @override
   Widget build(BuildContext context) {
-    print(Theme.of(context).textTheme.bodyLarge!.fontSize);
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(100),
@@ -84,7 +83,8 @@ class _ContentState extends State<Content> {
             )),
         body: FooterView(
           footer: Footer(
-            child: Container(
+            backgroundColor: Colors.black,
+            child: SizedBox(
               height: 100,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -95,7 +95,6 @@ class _ContentState extends State<Content> {
                 ],
               ),
             ),
-            backgroundColor: Colors.black,
           ),
           children: [
             Provider.of<PageProvider>(context).currentPage.showPage,

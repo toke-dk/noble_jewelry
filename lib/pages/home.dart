@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:noble_jewelry/models/collections.dart';
 import 'package:noble_jewelry/shared/buttons.dart';
 import 'package:noble_jewelry/shared/variables.dart';
-import 'package:noble_jewelry/shared/number_convert.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../models/product.dart';
+import '../widgets/show_product.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,7 +13,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final PageController controller = PageController();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -28,15 +25,11 @@ class Home extends StatelessWidget {
                     "lib/assets/images/logo/logo-vertical.svg"),
               ),
               Expanded(
-                child: Container(
-                  child: SvgPicture.asset(
-                      "lib/assets/images/logo/logo-with-text.svg"),
-                ),
-              ),
-              Container(
                 child: SvgPicture.asset(
-                    "lib/assets/images/logo/logo-vertical.svg"),
+                    "lib/assets/images/logo/logo-with-text.svg"),
               ),
+              SvgPicture.asset(
+                  "lib/assets/images/logo/logo-vertical.svg"),
             ],
           ),
         ),
@@ -92,14 +85,14 @@ class Home extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Flexible(
-                  child: Container(
+                  child: SizedBox(
                     width: 400,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Collection "시작" comming soon',
+                          'Collection "시작" coming soon'.toUpperCase(),
                           style: Theme.of(context).textTheme.headlineLarge,
                         ),
                         Text(
@@ -116,7 +109,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: 350,
                   child: Stack(
                     alignment: Alignment.center,
@@ -175,46 +168,44 @@ class Home extends StatelessWidget {
           ),
         ),
         Center(
-          child: Container(
+          child: SizedBox(
             height: 1000,
             width: 1100,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  child: Container(
-                    width: 500,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "About Us".toUpperCase(),
-                              style: Theme.of(context).textTheme.headlineLarge,
-                            ),
-                            PrimaryButton(text: "About page".toUpperCase(), onTap: (){})
-                          ],
-                        ),
-                        SizedBox(height: 22,),
-                        Text(
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla"),
-                        SizedBox(height: 40,),
-                        Image.asset("lib/assets/images/about_images/woodcraft.png")
-                      ],
-                    ),
+                SizedBox(
+                  width: 500,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "About Us".toUpperCase(),
+                            style: Theme.of(context).textTheme.headlineLarge,
+                          ),
+                          PrimaryButton(text: "About page".toUpperCase(), onTap: (){})
+                        ],
+                      ),
+                      const SizedBox(height: 22,),
+                      const Text(
+                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla"),
+                      const SizedBox(height: 40,),
+                      Image.asset("lib/assets/images/about_images/woodcraft.png")
+                    ],
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: 500,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Image.asset("lib/assets/images/about_images/handshake.png"),
-                      SizedBox(height: 40,),
+                      const SizedBox(height: 40,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -225,8 +216,8 @@ class Home extends StatelessWidget {
                           PrimaryButton(text: "Contact page".toUpperCase(), onTap: (){})
                         ],
                       ),
-                      SizedBox(height: 22,),
-                      Text(
+                      const SizedBox(height: 22,),
+                      const Text(
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla"),
                     ],
                   ),
@@ -278,127 +269,5 @@ class HorizontalProductScroll extends StatelessWidget {
             );
           },
         ));
-  }
-}
-
-class ShowProduct extends StatefulWidget {
-  const ShowProduct({Key? key, required this.product}) : super(key: key);
-  final Product product;
-
-  @override
-  State<ShowProduct> createState() => _ShowProductState();
-}
-
-class _ShowProductState extends State<ShowProduct> {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(5)),
-        constraints: const BoxConstraints(
-          maxWidth: 300,
-          minWidth: 300,
-          maxHeight: 540,
-          minHeight: 540,
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            widget.product.label != null
-                ? Positioned(
-                    left: 20,
-                    top: 20,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 12),
-                      child: Text(
-                        widget.product.label!.getName,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall!
-                            .copyWith(color: Colors.white),
-                      ),
-                    ),
-                  )
-                : const SizedBox(),
-            Positioned(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 65, bottom: 30, right: 20, left: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    widget.product.collections != null
-                        ? Center(
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 2, horizontal: 12),
-                              width: 134,
-                              height: 21,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey[100],
-                                  borderRadius: BorderRadius.circular(12)),
-                              child: Center(
-                                  child: Text(
-                                widget.product.collections!.getName,
-                                style: Theme.of(context).textTheme.bodySmall,
-                              )),
-                            ),
-                          )
-                        : const SizedBox(),
-                    widget.product.image,
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      widget.product.name,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          widget.product.priceUSD.convertDoublePriceToString,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        const SizedBox(
-                          width: 4,
-                        ),
-                        widget.product.oldPriceUSD != null
-                            ? Text(
-                                widget.product.oldPriceUSD!
-                                    .convertDoublePriceToString,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(
-                                        decoration: TextDecoration.lineThrough),
-                              )
-                            : const SizedBox(),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    PrimaryButton(
-                      outlined: true,
-                      text: 'Discover'.toUpperCase(),
-                      onTap: () {},
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
   }
 }
