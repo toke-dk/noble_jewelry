@@ -28,6 +28,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
   late Color backGroundColor;
   late Color foreGroundColor;
   late Color borderColor;
+  late Color textColor;
 
   late final Color initBackGroundColor = widget.outlined == true
       ? Theme.of(context).colorScheme.inversePrimary
@@ -43,27 +44,20 @@ class _PrimaryButtonState extends State<PrimaryButton> {
     backGroundColor = initBackGroundColor;
     foreGroundColor = initForeGroundColor;
     borderColor = initBorderColor;
+    textColor = initForeGroundColor;
   }
 
-  void callOnHover(BuildContext context, bool newHoverValue) {
-    if (widget.onlyUnderline != true) {
-      if (newHoverValue) {
-        backGroundColor = initForeGroundColor;
-        foreGroundColor = initBackGroundColor;
-        borderColor =
-            widget.outlined == true ? Colors.transparent : initBackGroundColor;
-      } else {
-        backGroundColor = initBackGroundColor;
-        foreGroundColor = initForeGroundColor;
-        borderColor =
-            widget.outlined == true ? initForeGroundColor : Colors.transparent;
-      }
-      setState(() {
-        backGroundColor;
-        foreGroundColor;
-        borderColor;
-      });
+  void changeTextColor() {
+    if (widget.onlyUnderline == true)
+      return;
+    else if (onHover) {
+      textColor = initBackGroundColor;
+    } else {
+      textColor = initForeGroundColor;
     }
+    setState(() {
+      textColor;
+    });
   }
 
   bool onHover = false;
@@ -78,9 +72,11 @@ class _PrimaryButtonState extends State<PrimaryButton> {
           focusColor: Colors.transparent,
           onTap: widget.onTap,
           onHover: (val) {
-            callOnHover(context, val);
             setState(() {
               onHover = val;
+            });
+            Future.delayed((kAnimationSpeed * 0.5), () {
+              changeTextColor();
             });
           },
           child: Stack(
@@ -101,11 +97,14 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                       .animate(
                         target: onHover ? 1 : 0,
                       )
-                      .scaleY(duration: kAnimationSpeed, delay: kAnimationDelay)
+                      .scaleY(
+                          duration: kAnimationSpeed,
+                          delay: kAnimationDelay,
+                          alignment: Alignment.bottomCenter)
                   : const SizedBox.shrink(),
               Container(
                 width: double.infinity,
-                decoration: BoxDecoration(),
+                decoration: const BoxDecoration(),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 child: Row(
@@ -133,7 +132,7 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                           Text(
                             widget.text,
                             style: TextStyle(
-                                color: foreGroundColor,
+                                color: textColor,
                                 fontWeight: widget.initUnderline == true
                                     ? FontWeight.bold
                                     : null),
@@ -155,20 +154,22 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                                   .scaleX(
                                       duration: kAnimationSpeed,
                                       delay: kAnimationDelay)
-                              : SizedBox()
+                              : const SizedBox()
                         ],
                       ),
                     ),
                   ],
                 ),
               ),
-              widget.onlyUnderline != true ? Container(
-                decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(color: initBorderColor)),
-                width: double.infinity,
-                height: double.infinity,
-              ) : const SizedBox.shrink(),
+              widget.onlyUnderline != true
+                  ? Container(
+                      decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border.all(color: initBorderColor)),
+                      width: double.infinity,
+                      height: double.infinity,
+                    )
+                  : const SizedBox.shrink(),
             ],
           ),
         ),
