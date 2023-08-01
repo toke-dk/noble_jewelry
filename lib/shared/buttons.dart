@@ -68,11 +68,18 @@ class _PrimaryButtonState extends State<PrimaryButton> {
     }
   }
 
+  bool onHover = false;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
         onTap: widget.onTap,
-        onHover: (val) => callOnHover(context, val),
+        onHover: (val) {
+          callOnHover(context, val);
+          setState(() {
+            onHover = val;
+          });
+        },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           decoration: BoxDecoration(
@@ -95,7 +102,6 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                       ],
                     )
                   : const SizedBox(),
-
               IntrinsicWidth(
                 stepWidth: 0,
                 child: Column(
@@ -103,19 +109,29 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                   children: [
                     Text(
                       widget.text,
-                      style: TextStyle(color: foreGroundColor),
+                      style: TextStyle(
+                          color: foreGroundColor,
+                          fontWeight: widget.initUnderline == true
+                              ? FontWeight.bold
+                              : null),
                     ),
                     widget.onlyUnderline == true
                         ? Container(
                             height: 2,
-                            color: widget.initUnderline == true ? Theme.of(context).colorScheme.primary : Colors.transparent,
+                            color: Theme.of(context).colorScheme.primary
                           )
+                            .animate(
+                              target: widget.initUnderline == true || onHover
+                                  ? 1
+                                  : 0,
+                            ).tint(color: Theme.of(context).colorScheme.primary)
+                            .scaleX(
+                                duration: 90.milliseconds, delay: 100.milliseconds)
                         : SizedBox()
                   ],
                 ),
               ),
             ],
-
           ),
         ));
   }
