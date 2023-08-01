@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:noble_jewelry/shared/constants.dart';
+import 'package:noble_jewelry/shared/variables.dart';
 import 'package:provider/provider.dart';
 
 import '../models/pageProvider.dart';

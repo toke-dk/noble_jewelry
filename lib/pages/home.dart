@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:noble_jewelry/models/collections.dart';
 import 'package:noble_jewelry/shared/buttons.dart';
-import 'package:noble_jewelry/shared/constants.dart';
+import 'package:noble_jewelry/shared/variables.dart';
 import 'package:noble_jewelry/shared/number_convert.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../models/product.dart';
@@ -243,43 +243,7 @@ class Home extends StatelessWidget {
 class HorizontalProductScroll extends StatelessWidget {
   HorizontalProductScroll({Key? key}) : super(key: key);
 
-  final List<Product> products = [
-    Product(
-        label: Labels.soldOut,
-        collections: Collections.theBeginning,
-        oldPriceUSD: 1299,
-        image: Image.asset("lib/assets/images/bracelets/brace5.png"),
-        name: "a",
-        priceUSD: 999),
-    Product(
-        image: Image.asset("lib/assets/images/bracelets/brace6.png"),
-        name: "b",
-        priceUSD: 2),
-    Product(
-        image: Image.asset("lib/assets/images/bracelets/brace7.png"),
-        name: "c",
-        priceUSD: 3),
-    Product(
-        image: Image.asset("lib/assets/images/bracelets/brace8.png"),
-        name: "d",
-        priceUSD: 4),
-    Product(
-        image: Image.asset("lib/assets/images/bracelets/brace9.png"),
-        name: "e",
-        priceUSD: 5),
-    Product(
-        image: Image.asset("lib/assets/images/bracelets/brace5.png"),
-        name: "f",
-        priceUSD: 6),
-    Product(
-        image: Image.asset("lib/assets/images/bracelets/brace5.png"),
-        name: "g",
-        priceUSD: 7),
-    Product(
-        image: Image.asset("lib/assets/images/bracelets/brace5.png"),
-        name: "h",
-        priceUSD: 8),
-  ];
+  final List<Product> products = exampleProducts;
 
   final int itemsPerView = 4;
 
@@ -364,7 +328,7 @@ class _ShowProductState extends State<ShowProduct> {
             Positioned(
               child: Padding(
                 padding: const EdgeInsets.only(
-                    top: 55, bottom: 30, right: 20, left: 20),
+                    top: 65, bottom: 30, right: 20, left: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.end,
