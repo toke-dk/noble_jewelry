@@ -5,12 +5,15 @@ class TopPageTitle extends StatelessWidget {
       {Key? key,
       required this.headlineSmall,
       required this.headlineLarge,
-      this.centerText})
+      this.centerText,
+      this.bodyText, this.bodyWidth})
       : super(key: key);
 
   final String headlineSmall;
   final String headlineLarge;
   final bool? centerText;
+  final String? bodyText;
+  final double? bodyWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,15 @@ class TopPageTitle extends StatelessWidget {
           textAlign: centerText == true ? TextAlign.center : null,
           style: Theme.of(context).textTheme.headlineLarge,
         ),
-
+        bodyText != null
+            ? SizedBox(
+          width: bodyWidth,
+              child: Text(
+                  bodyText!,
+          textAlign: TextAlign.center,
+                ),
+            )
+            : SizedBox()
       ],
     );
   }

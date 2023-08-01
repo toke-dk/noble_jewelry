@@ -41,7 +41,7 @@ extension MenuItemsNavigator on Pages {
 
 class PageProvider extends ChangeNotifier {
   /// TODO change this in production
-  Pages _currentPage = Pages.about;
+  Pages _currentPage = Pages.contactUs;
 
   Pages get currentPage => _currentPage;
 

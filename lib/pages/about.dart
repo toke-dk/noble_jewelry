@@ -18,16 +18,12 @@ class About extends StatelessWidget {
               child: TopPageTitle(
                 centerText: true,
                 headlineSmall: 'About',
+                bodyWidth: 720,
+                bodyText:
+                    "At NOBLE, we craft exquisite wood bracelets, seamlessly blending elegance with nature. Our journey embraces sustainable craftsmanship, preserving Earth's wonders. Discover wearable treasures from lush forests, shaped by skilled artisans. Embrace sustainable chic in our exclusive collection—an enchanting journey from forest to fashion, celebrating nature's allure and style.",
                 headlineLarge:
-                'From Forest to Fashion:\nThe Journey of Our Exclusive Bracelets',
+                    'From Forest to Fashion:\nThe Journey of Our Exclusive Bracelets',
               )),
-          Container(
-            width: 720,
-            child: const Text(
-              "At NOBLE, we craft exquisite wood bracelets, seamlessly blending elegance with nature. Our journey embraces sustainable craftsmanship, preserving Earth's wonders. Discover wearable treasures from lush forests, shaped by skilled artisans. Embrace sustainable chic in our exclusive collection—an enchanting journey from forest to fashion, celebrating nature's allure and style.",
-              textAlign: TextAlign.center,
-            ),
-          ),
           SizedBox(
             height: contentSpacing,
           ),
@@ -63,15 +59,17 @@ class About extends StatelessWidget {
             subtitle: 'Craftsmen',
             title: 'Empowering Local Artisans',
             text:
-            'Our commitment to ethical practices extends beyond sourcing. We collaborate with local artisans, empowering them with fair wages and safe working conditions. By supporting these talented individuals, we foster a community of creativity and craftsmanship, elevating the quality of each wood bracelet they create.',
+                'Our commitment to ethical practices extends beyond sourcing. We collaborate with local artisans, empowering them with fair wages and safe working conditions. By supporting these talented individuals, we foster a community of creativity and craftsmanship, elevating the quality of each wood bracelet they create.',
           ),
-          SizedBox(height: contentSpacing,),
+          SizedBox(
+            height: contentSpacing,
+          ),
           _Section(
             reverse: true,
             subtitle: 'Craftsmen',
             title: 'Empowering Local Artisans',
             text:
-            'Our commitment to ethical practices extends beyond sourcing. We collaborate with local artisans, empowering them with fair wages and safe working conditions. By supporting these talented individuals, we foster a community of creativity and craftsmanship, elevating the quality of each wood bracelet they create.',
+                'Our commitment to ethical practices extends beyond sourcing. We collaborate with local artisans, empowering them with fair wages and safe working conditions. By supporting these talented individuals, we foster a community of creativity and craftsmanship, elevating the quality of each wood bracelet they create.',
           ),
           SizedBox(
             height: contentSpacing,
@@ -80,7 +78,7 @@ class About extends StatelessWidget {
             subtitle: 'Craftsmen',
             title: 'Empowering Local Artisans',
             text:
-            'Our commitment to ethical practices extends beyond sourcing. We collaborate with local artisans, empowering them with fair wages and safe working conditions. By supporting these talented individuals, we foster a community of creativity and craftsmanship, elevating the quality of each wood bracelet they create.',
+                'Our commitment to ethical practices extends beyond sourcing. We collaborate with local artisans, empowering them with fair wages and safe working conditions. By supporting these talented individuals, we foster a community of creativity and craftsmanship, elevating the quality of each wood bracelet they create.',
           ),
         ],
       ),
@@ -89,13 +87,14 @@ class About extends StatelessWidget {
 }
 
 class _Section extends StatelessWidget {
-  _Section({Key? key,
-    required this.subtitle,
-    required this.title,
-    required this.text,
-    this.buttonText,
-    this.onButtonTap,
-    this.reverse})
+  _Section(
+      {Key? key,
+      required this.subtitle,
+      required this.title,
+      required this.text,
+      this.buttonText,
+      this.onButtonTap,
+      this.reverse})
       : super(key: key);
   final String subtitle;
   final String title;
@@ -105,60 +104,59 @@ class _Section extends StatelessWidget {
   final bool? reverse;
 
   final Widget image =
-  Image.asset("lib/assets/images/about_images/woodcraft.png");
+      Image.asset("lib/assets/images/about_images/woodcraft.png");
   static const double spaceBetweenImages = 60;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        reverse != true ? Row(
-          children: [
-            image,
-            const SizedBox(
-              width: spaceBetweenImages,
-            ),
-          ],
-        ) : SizedBox(),
+        reverse != true
+            ? Row(
+                children: [
+                  image,
+                  const SizedBox(
+                    width: spaceBetweenImages,
+                  ),
+                ],
+              )
+            : SizedBox(),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 subtitle.toUpperCase(),
-                style: Theme
-                    .of(context)
+                style: Theme.of(context)
                     .textTheme
                     .headlineSmall!
-                    .copyWith(color: Theme
-                    .of(context)
-                    .colorScheme
-                    .tertiary),
+                    .copyWith(color: Theme.of(context).colorScheme.tertiary),
               ),
               Text(
                 title.toUpperCase(),
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .headlineLarge,
+                style: Theme.of(context).textTheme.headlineLarge,
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Text(text),
               buttonText != null
                   ? PrimaryButton(
-                  text: buttonText!.toUpperCase(), onTap: () => onButtonTap)
+                      text: buttonText!.toUpperCase(), onTap: () => onButtonTap)
                   : const SizedBox(),
             ],
           ),
         ),
-        reverse == true ? Row(
-          children: [
-            const SizedBox(
-              width: spaceBetweenImages,
-            ),
-            image,
-          ],
-        ) : SizedBox(),
+        reverse == true
+            ? Row(
+                children: [
+                  const SizedBox(
+                    width: spaceBetweenImages,
+                  ),
+                  image,
+                ],
+              )
+            : SizedBox(),
       ],
     );
   }
