@@ -95,22 +95,27 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                       ],
                     )
                   : const SizedBox(),
-              Column(
-                children: [
-                  Text(
-                    widget.text,
-                    style: TextStyle(color: foreGroundColor),
-                  ),
-                  widget.onlyUnderline == true
-                      ? Container(
-                          height: 2,
-                          width: widget.initUnderline == true ? 20 : 0,
-                          color: Theme.of(context).colorScheme.primary,
-                        )
-                      : SizedBox()
-                ],
+
+              IntrinsicWidth(
+                stepWidth: 0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      widget.text,
+                      style: TextStyle(color: foreGroundColor),
+                    ),
+                    widget.onlyUnderline == true
+                        ? Container(
+                            height: 2,
+                            color: widget.initUnderline == true ? Theme.of(context).colorScheme.primary : Colors.transparent,
+                          )
+                        : SizedBox()
+                  ],
+                ),
               ),
             ],
+
           ),
         ));
   }
