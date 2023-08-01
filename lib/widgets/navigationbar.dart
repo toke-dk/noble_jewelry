@@ -32,15 +32,17 @@ class MyNavigationBar extends StatelessWidget {
               ],
             ),
           ),
-          FittedBox(
-            child: InkWell(
-                highlightColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                onTap: () => Provider.of<PageProvider>(context, listen: false)
-                    .setCurrentPage(Pages.home),
-                child:
-                    SvgPicture.asset("lib/assets/images/logo/logo-and-name.svg")),
+          SizedBox.expand(
+            child: FittedBox(
+              child: InkWell(
+                  highlightColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  onTap: () => Provider.of<PageProvider>(context, listen: false)
+                      .setCurrentPage(Pages.home),
+                  child:
+                      SvgPicture.asset("lib/assets/images/logo/logo-and-name.svg")),
+            ),
           ),
         ],
       ),
