@@ -35,14 +35,14 @@ class MainApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
           fontFamily: GoogleFonts.hind().fontFamily,
           textTheme: const TextTheme(
-              bodyMedium: TextStyle(
-                  letterSpacing: 1.5,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w100),
-              headlineLarge: TextStyle(
-                height: 1.1,
-                color: Colors.black,
-              )),
+            bodyMedium: TextStyle(
+                letterSpacing: 1.5, fontSize: 16, fontWeight: FontWeight.w100),
+            headlineLarge: TextStyle(
+              height: 1.1,
+              color: Colors.black,
+            ),
+            headlineSmall: TextStyle(fontSize: 21),
+          ),
           appBarTheme: const AppBarTheme(
               toolbarHeight: 110,
               centerTitle: true,
@@ -90,15 +90,29 @@ class _ContentState extends State<Content> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text("FOLOW US",style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),),
-                  Text("home | about | contact".toUpperCase(),style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),),
-                  Text("@2023 Noble - Men’s fashion bracelets",style: TextStyle(color: Theme.of(context).colorScheme.tertiary),)
+                  Text(
+                    "FOLOW US",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary),
+                  ),
+                  Text(
+                    "home | about | contact".toUpperCase(),
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary),
+                  ),
+                  Text(
+                    "@2023 Noble - Men’s fashion bracelets",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary),
+                  )
                 ],
               ),
             ),
           ),
           children: [
-            Provider.of<PageProvider>(context).currentPage.showPage,
+            Align(
+                alignment: Alignment.center,
+                child: Provider.of<PageProvider>(context).currentPage.showPage),
           ],
         ));
   }
