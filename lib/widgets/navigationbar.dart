@@ -13,7 +13,8 @@ class MyNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: kPagePadding, right: kPagePadding, bottom: 25, top: 25),
+      padding: const EdgeInsets.only(
+          left: kPagePadding, right: kPagePadding, bottom: 25, top: 25),
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -41,8 +42,8 @@ class MyNavigationBar extends StatelessWidget {
                   hoverColor: Colors.transparent,
                   onTap: () => Provider.of<PageProvider>(context, listen: false)
                       .setCurrentPage(Pages.home),
-                  child:
-                      SvgPicture.asset("lib/assets/images/logo/logo-and-name.svg")),
+                  child: SvgPicture.asset(
+                      "lib/assets/images/logo/logo-and-name.svg")),
             ),
           ),
         ],
@@ -66,7 +67,7 @@ class _MenuState extends State<Menu> {
   Pages? currentHoveredItem;
 
   Pages getCurrentPage(context) =>
-      Provider.of<PageProvider>(context).currentPage;
+      Provider.of<PageProvider>(context, listen: true).currentPage;
 
   void setCurrentPage(context, page) =>
       Provider.of<PageProvider>(context, listen: false).setCurrentPage(page);
@@ -77,34 +78,15 @@ class _MenuState extends State<Menu> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: List.generate(allPages.length, (index) {
         Pages currentIndexPage = allPages[index];
-        return InkWell(
-            highlightColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            onTap: () => setCurrentPage(context, currentIndexPage),
-            onHover: (val) => setState(() {
-                  val == true
-                      ? currentHoveredItem = currentIndexPage
-                      : currentHoveredItem = null;
-                }),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: getCurrentPage(context) == currentIndexPage
-                      ? Theme.of(context).colorScheme.primary
-                      : null,
-                  border: Border.all(
-                      color: currentIndexPage == currentHoveredItem
-                          ? Theme.of(context).colorScheme.primary
-                          : Colors.transparent)),
-              padding: const EdgeInsets.all(12),
-              child: Text(
-                currentIndexPage.getName.toUpperCase(),
-                style: TextStyle(
-                    color: currentIndexPage == getCurrentPage(context)
-                        ? Colors.white
-                        : null),
-              ),
-            ));
+          return PrimaryButton(
+            text: currentIndexPage.getName.toUpperCase(),
+            onTap: () => setState((){setCurrentPage(context, currentIndexPage);}),
+            outlined: true,
+            initUnderline: getCurrentPage(context) == currentIndexPage,
+            onlyUnderline: true,
+          );
+
+
       }),
     );
   }
