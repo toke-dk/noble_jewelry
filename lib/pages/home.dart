@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:noble_jewelry/shared/buttons.dart';
 import 'package:noble_jewelry/shared/variables.dart';
+import 'package:page_view_dot_indicator/page_view_dot_indicator.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../models/product.dart';
 import '../widgets/show_product.dart';
@@ -28,8 +29,7 @@ class Home extends StatelessWidget {
                 child: SvgPicture.asset(
                     "lib/assets/images/logo/logo-with-text.svg"),
               ),
-              SvgPicture.asset(
-                  "lib/assets/images/logo/logo-vertical.svg"),
+              SvgPicture.asset("lib/assets/images/logo/logo-vertical.svg"),
             ],
           ),
         ),
@@ -187,14 +187,20 @@ class Home extends StatelessWidget {
                             "About Us".toUpperCase(),
                             style: Theme.of(context).textTheme.headlineLarge,
                           ),
-                          PrimaryButton(text: "About page".toUpperCase(), onTap: (){})
+                          PrimaryButton(
+                              text: "About page".toUpperCase(), onTap: () {})
                         ],
                       ),
-                      const SizedBox(height: 22,),
+                      const SizedBox(
+                        height: 22,
+                      ),
                       const Text(
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla"),
-                      const SizedBox(height: 40,),
-                      Image.asset("lib/assets/images/about_images/woodcraft.png")
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Image.asset(
+                          "lib/assets/images/about_images/woodcraft.png")
                     ],
                   ),
                 ),
@@ -204,8 +210,11 @@ class Home extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset("lib/assets/images/about_images/handshake.png"),
-                      const SizedBox(height: 40,),
+                      Image.asset(
+                          "lib/assets/images/about_images/handshake.png"),
+                      const SizedBox(
+                        height: 40,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -213,10 +222,13 @@ class Home extends StatelessWidget {
                             "Contact Us".toUpperCase(),
                             style: Theme.of(context).textTheme.headlineLarge,
                           ),
-                          PrimaryButton(text: "Contact page".toUpperCase(), onTap: (){})
+                          PrimaryButton(
+                              text: "Contact page".toUpperCase(), onTap: () {})
                         ],
                       ),
-                      const SizedBox(height: 22,),
+                      const SizedBox(
+                        height: 22,
+                      ),
                       const Text(
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla"),
                     ],
@@ -231,43 +243,72 @@ class Home extends StatelessWidget {
   }
 }
 
-class HorizontalProductScroll extends StatelessWidget {
-  HorizontalProductScroll({Key? key}) : super(key: key);
+class HorizontalProductScroll extends StatefulWidget {
+  const HorizontalProductScroll({Key? key}) : super(key: key);
 
+  @override
+  State<HorizontalProductScroll> createState() =>
+      _HorizontalProductScrollState();
+}
+
+class _HorizontalProductScrollState extends State<HorizontalProductScroll> {
   final List<Product> products = exampleProducts;
+  late int selectedPage;
+  late final PageController _pageController;
+
+  @override
+  void initState() {
+    selectedPage = 0;
+    _pageController = PageController(initialPage: selectedPage);
+
+    super.initState();
+  }
 
   final int itemsPerView = 4;
+  late int totalAmountOfPages = (products.length / itemsPerView).ceil();
 
   @override
   Widget build(BuildContext context) {
     int counter = 0;
-    return SizedBox(
-        height: 600,
-        child: ScrollablePositionedList.builder(
-          itemCount: (products.length / itemsPerView).ceil(),
-          scrollDirection: Axis.horizontal,
-          physics: const PageScrollPhysics(),
-          itemBuilder: (context, indexWeek) {
-            return SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Center(
-                child: ListView.separated(
-                    shrinkWrap: true,
-                    separatorBuilder: (context, index) => SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.07,
-                        ),
-                    itemCount: itemsPerView,
-                    padding: const EdgeInsets.all(10),
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (BuildContext context, int index) {
-                      counter++;
-                      return counter <= products.length
-                          ? ShowProduct(product: products[counter - 1])
-                          : const SizedBox();
-                    }),
-              ),
-            );
-          },
-        ));
+    return Column(
+      children: [
+        SizedBox(
+            height: 600,
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: totalAmountOfPages,
+              onPageChanged: (int newIndex) => setState(() {
+                selectedPage = newIndex;
+              }),
+              itemBuilder: (context, indexWeek) {
+                return SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(
+                    child: ListView.separated(
+                        shrinkWrap: true,
+                        separatorBuilder: (context, index) => SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.07,
+                            ),
+                        itemCount: itemsPerView,
+                        padding: const EdgeInsets.all(10),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
+                          counter++;
+                          return counter <= products.length
+                              ? ShowProduct(product: products[counter - 1])
+                              : const SizedBox();
+                        }),
+                  ),
+                );
+              },
+            )),
+        PageViewDotIndicator(
+            borderColor: Theme.of(context).colorScheme.inversePrimary,
+            currentItem: selectedPage,
+            count: totalAmountOfPages,
+            unselectedColor: Theme.of(context).colorScheme.primary,
+            selectedColor: Theme.of(context).colorScheme.inversePrimary),
+      ],
+    );
   }
 }
