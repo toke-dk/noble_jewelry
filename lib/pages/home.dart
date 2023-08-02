@@ -270,44 +270,61 @@ class _HorizontalProductScrollState extends State<HorizontalProductScroll> {
   @override
   Widget build(BuildContext context) {
     int counter = 0;
-    return Column(
+    return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
-            height: 600,
-            child: PageView.builder(
-              controller: _pageController,
-              itemCount: totalAmountOfPages,
-              onPageChanged: (int newIndex) => setState(() {
-                selectedPage = newIndex;
-              }),
-              itemBuilder: (context, indexWeek) {
-                return SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Center(
-                    child: ListView.separated(
-                        shrinkWrap: true,
-                        separatorBuilder: (context, index) => SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.07,
-                            ),
-                        itemCount: itemsPerView,
-                        padding: const EdgeInsets.all(10),
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          counter++;
-                          return counter <= products.length
-                              ? ShowProduct(product: products[counter - 1])
-                              : const SizedBox();
-                        }),
-                  ),
-                );
-              },
+        IconButton(
+            onPressed: () => setState(() {
+              selectedPage = 0;
+            }),
+            icon: Icon(
+              Icons.chevron_left,
+              color: Theme.of(context).colorScheme.inversePrimary.withOpacity(selectedPage == 0 ? 0.2 : 1),
             )),
-        PageViewDotIndicator(
-            borderColor: Theme.of(context).colorScheme.inversePrimary,
-            currentItem: selectedPage,
-            count: totalAmountOfPages,
-            unselectedColor: Theme.of(context).colorScheme.primary,
-            selectedColor: Theme.of(context).colorScheme.inversePrimary),
+        Expanded(
+          child: Column(
+            children: [
+              SizedBox(
+                  height: 600,
+                  child: PageView.builder(
+                    controller: _pageController,
+                    itemCount: totalAmountOfPages,
+                    onPageChanged: (int newIndex) => setState(() {
+                      selectedPage = newIndex;
+                    }),
+                    itemBuilder: (context, indexWeek) {
+                      return SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Center(
+                          child: ListView.separated(
+                              shrinkWrap: true,
+                              separatorBuilder: (context, index) => SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.07,
+                                  ),
+                              itemCount: itemsPerView,
+                              padding: const EdgeInsets.all(10),
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (BuildContext context, int index) {
+                                counter++;
+                                return counter <= products.length
+                                    ? ShowProduct(
+                                        product: products[counter - 1])
+                                    : const SizedBox();
+                              }),
+                        ),
+                      );
+                    },
+                  )),
+              PageViewDotIndicator(
+                  borderColor: Theme.of(context).colorScheme.inversePrimary,
+                  currentItem: selectedPage,
+                  count: totalAmountOfPages,
+                  unselectedColor: Theme.of(context).colorScheme.primary,
+                  selectedColor: Theme.of(context).colorScheme.inversePrimary),
+            ],
+          ),
+        ),
       ],
     );
   }
