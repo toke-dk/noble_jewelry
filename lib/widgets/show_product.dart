@@ -21,8 +21,8 @@ class _ShowProductState extends State<ShowProduct> {
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(5)),
         constraints: const BoxConstraints(
-          maxWidth: 300,
-          minWidth: 300,
+          maxWidth: 270,
+          minWidth: 270,
           maxHeight: 540,
           minHeight: 540,
         ),

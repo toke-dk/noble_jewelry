@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:noble_jewelry/shared/buttons.dart';
 import 'package:noble_jewelry/shared/variables.dart';
@@ -163,7 +165,10 @@ class Home extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              HorizontalProductScroll()
+              ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 1300),
+                child: HorizontalProductScroll(),
+              )
             ],
           ),
         ),
@@ -273,46 +278,49 @@ class _HorizontalProductScrollState extends State<HorizontalProductScroll> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        IconButton(
-            onPressed: () => setState(() {
-              selectedPage = 0;
-            }),
-            icon: Icon(
-              Icons.chevron_left,
-              color: Theme.of(context).colorScheme.inversePrimary.withOpacity(selectedPage == 0 ? 0.2 : 1),
-            )),
+        ChangePageIcon(
+          selectedPage: selectedPage,
+          totalAmountOfPages: totalAmountOfPages,
+          pageController: _pageController,
+          onPress: (int newPage) {
+            print(newPage);
+            setState(() {
+              selectedPage = newPage;
+              _pageController.animateToPage(newPage,
+                  duration: 1.seconds, curve: Curves.easeInOutQuad);
+            });
+          },
+          direction: Directions.backward,
+        ),
         Expanded(
           child: Column(
             children: [
               SizedBox(
                   height: 600,
                   child: PageView.builder(
+                    scrollDirection: Axis.horizontal,
                     controller: _pageController,
                     itemCount: totalAmountOfPages,
                     onPageChanged: (int newIndex) => setState(() {
                       selectedPage = newIndex;
                     }),
                     itemBuilder: (context, indexWeek) {
-                      return SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: Center(
-                          child: ListView.separated(
-                              shrinkWrap: true,
-                              separatorBuilder: (context, index) => SizedBox(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.07,
-                                  ),
-                              itemCount: itemsPerView,
-                              padding: const EdgeInsets.all(10),
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (BuildContext context, int index) {
-                                counter++;
-                                return counter <= products.length
-                                    ? ShowProduct(
-                                        product: products[counter - 1])
-                                    : const SizedBox();
-                              }),
-                        ),
+                      return Center(
+                        child: ListView.separated(
+                            shrinkWrap: true,
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                            itemCount: itemsPerView,
+                            padding: const EdgeInsets.all(10),
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (BuildContext context, int index) {
+                              counter++;
+                              return counter <= products.length
+                                  ? ShowProduct(product: products[counter - 1])
+                                  : const SizedBox();
+                            }),
                       );
                     },
                   )),
@@ -325,7 +333,75 @@ class _HorizontalProductScrollState extends State<HorizontalProductScroll> {
             ],
           ),
         ),
+        ChangePageIcon(
+          selectedPage: selectedPage,
+          totalAmountOfPages: totalAmountOfPages,
+          pageController: _pageController,
+          onPress: (int newPage) {
+            print(newPage);
+            setState(() {
+              selectedPage = newPage;
+              _pageController.animateToPage(newPage,
+                  duration: 1.seconds, curve: Curves.easeInOutQuad);
+            });
+          },
+          direction: Directions.forward,
+        ),
       ],
     );
   }
 }
+
+class ChangePageIcon extends StatefulWidget {
+  const ChangePageIcon(
+      {Key? key,
+      required this.selectedPage,
+      required this.totalAmountOfPages,
+      required this.pageController,
+      required this.onPress,
+      required this.direction})
+      : super(key: key);
+  final int selectedPage;
+
+  final int totalAmountOfPages;
+
+  final PageController pageController;
+
+  final Function(int newPage) onPress;
+
+  final Directions direction;
+
+  @override
+  State<ChangePageIcon> createState() => _ChangePageIconState();
+}
+
+class _ChangePageIconState extends State<ChangePageIcon> {
+  @override
+  Widget build(BuildContext context) {
+    final bool isAtEnd = widget.direction == Directions.forward
+        ? widget.selectedPage == widget.totalAmountOfPages - 1
+        : widget.selectedPage == 0;
+    return IconButton(
+        onPressed: !isAtEnd
+            ? () {
+                int newPageIndex;
+                if (widget.direction == Directions.forward) {
+                  newPageIndex = widget.selectedPage + 1;
+                } else {
+                  newPageIndex = widget.selectedPage - 1;
+                }
+                widget.onPress(newPageIndex);
+              }
+            : null,
+        disabledColor:
+            Theme.of(context).colorScheme.inversePrimary.withOpacity(0.5),
+        color: Theme.of(context).colorScheme.inversePrimary,
+        icon: Icon(
+          widget.direction == Directions.forward
+              ? Icons.chevron_right
+              : Icons.chevron_left,
+        ));
+  }
+}
+
+enum Directions { forward, backward }
