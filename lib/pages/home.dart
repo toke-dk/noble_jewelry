@@ -21,6 +21,41 @@ class Home extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Container(
+          height: 720,
+          width: double.infinity,
+          child: Container(
+            child: Stack(
+              children: [
+                Stack(
+                  children: [
+                    Positioned.fill(
+                      child: Image.asset(
+                        "lib/assets/images/about_images/wood-tree.png", fit: BoxFit
+                        .cover,
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Opacity(
+                        opacity: 0.5,
+                        child: Container(
+                          color: Colors.black,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Positioned(
+                  top: 20.0,
+                  left: 20.0,
+                  child: Text(
+                    'Your Text Here',
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: kPagePadding),
           child: Row(
@@ -46,11 +81,12 @@ class Home extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset("lib/assets/images/bracelets/brace1.png"),
-                SizedBox(width: 80,),
-
+                SizedBox(
+                  width: 80,
+                ),
                 Flexible(
                   child: Container(
-                  width: 350,
+                    width: 350,
                     height: 300,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,13 +94,19 @@ class Home extends StatelessWidget {
                       children: [
                         Text(
                           "Nature's finesse on your wrist".toUpperCase(),
-                          style: Theme.of(context).textTheme.headlineSmall,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .headlineSmall,
                         ),
                         Text(
                           "Explore Our High-Quality Wooden Bracelets"
                               .toUpperCase(),
                           overflow: TextOverflow.clip,
-                          style: Theme.of(context).textTheme.headlineLarge,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .headlineLarge,
                         ),
                         PrimaryButton(
                           text: "shop now".toUpperCase(),
@@ -98,12 +140,18 @@ class Home extends StatelessWidget {
                       children: [
                         Text(
                           'Collection "시작" coming soon'.toUpperCase(),
-                          style: Theme.of(context).textTheme.headlineLarge,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .headlineLarge,
                         ),
                         Text(
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla",
                           overflow: TextOverflow.clip,
-                          style: Theme.of(context).textTheme.bodyMedium,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .bodyMedium,
                         ),
                         PrimaryButton(
                           outlined: true,
@@ -147,19 +195,19 @@ class Home extends StatelessWidget {
         Column(
           children: [
             Center(
-                child: Text(
-              "Most popular".toUpperCase(),
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineLarge!
-            )),
+                child: Text("Most popular".toUpperCase(),
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .headlineLarge!)),
             Center(
                 child: Text(
-              "Discover the Irresistible Favorites: Unmatched in Quality and Admired by All!",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!,
-            )),
+                  "Discover the Irresistible Favorites: Unmatched in Quality and Admired by All!",
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .bodyMedium!,
+                )),
             const SizedBox(
               height: 30,
             ),
@@ -168,7 +216,9 @@ class Home extends StatelessWidget {
               child: Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(4, (index) => ShowProduct(product: exampleProducts[index])),
+                  children: List.generate(4,
+                          (index) =>
+                          ShowProduct(product: exampleProducts[index])),
                 ),
               ),
             )
@@ -192,7 +242,10 @@ class Home extends StatelessWidget {
                         children: [
                           Text(
                             "About Us".toUpperCase(),
-                            style: Theme.of(context).textTheme.headlineLarge,
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .headlineLarge,
                           ),
                           PrimaryButton(
                               text: "About page".toUpperCase(), onTap: () {})
@@ -227,7 +280,10 @@ class Home extends StatelessWidget {
                         children: [
                           Text(
                             "Contact Us".toUpperCase(),
-                            style: Theme.of(context).textTheme.headlineLarge,
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .headlineLarge,
                           ),
                           PrimaryButton(
                               text: "Contact page".toUpperCase(), onTap: () {})
@@ -249,4 +305,3 @@ class Home extends StatelessWidget {
     );
   }
 }
-
