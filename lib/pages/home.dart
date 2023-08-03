@@ -41,15 +41,16 @@ class Home extends StatelessWidget {
           height: contentSpacing,
         ),
         Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 1100),
+          child: Container(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset("lib/assets/images/bracelets/brace1.png"),
+                SizedBox(width: 80,),
+
                 Flexible(
                   child: Container(
-                    padding: const EdgeInsets.only(left: 80),
+                  width: 350,
                     height: 300,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -143,41 +144,35 @@ class Home extends StatelessWidget {
         const SizedBox(
           height: contentSpacing,
         ),
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 40),
-          color: Theme.of(context).primaryColor.withOpacity(0.9),
-          child: Column(
-            children: [
-              Center(
-                  child: Text(
-                "Most popular".toUpperCase(),
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineLarge!
-                    .copyWith(color: Theme.of(context).colorScheme.onPrimary),
-              )),
-              Center(
-                  child: Text(
-                "Discover the Irresistible Favorites: Unmatched in Quality and Admired by All!",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(color: Theme.of(context).colorScheme.onPrimary),
-              )),
-              const SizedBox(
-                height: 30,
-              ),
-              ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 1100),
-                child: Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(4, (index) => ShowProduct(product: exampleProducts[index])),
-                  ),
+        Column(
+          children: [
+            Center(
+                child: Text(
+              "Most popular".toUpperCase(),
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineLarge!
+            )),
+            Center(
+                child: Text(
+              "Discover the Irresistible Favorites: Unmatched in Quality and Admired by All!",
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!,
+            )),
+            const SizedBox(
+              height: 30,
+            ),
+            ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 1100),
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(4, (index) => ShowProduct(product: exampleProducts[index])),
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
         Center(
           child: SizedBox(
