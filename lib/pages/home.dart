@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -285,8 +287,7 @@ class _HorizontalProductScrollState extends State<HorizontalProductScroll> {
           onPress: (int newPage) {
             print(newPage);
             setState(() {
-              selectedPage = newPage;
-              _pageController.animateToPage(newPage,
+              _pageController.animateToPage(0,
                   duration: 1.seconds, curve: Curves.easeInOutQuad);
             });
           },
@@ -305,23 +306,24 @@ class _HorizontalProductScrollState extends State<HorizontalProductScroll> {
                       selectedPage = newIndex;
                     }),
                     itemBuilder: (context, indexWeek) {
-                      return Center(
-                        child: ListView.separated(
-                            shrinkWrap: true,
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(
-                                  width: 16,
-                                ),
-                            itemCount: itemsPerView,
-                            padding: const EdgeInsets.all(10),
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (BuildContext context, int index) {
-                              counter++;
-                              return counter <= products.length
-                                  ? ShowProduct(product: products[counter - 1])
-                                  : const SizedBox();
-                            }),
-                      );
+                      final int startRange = indexWeek*itemsPerView;
+                      final int endRange = min(startRange + itemsPerView, products.length - 1);
+                      final int rangeSize = endRange-startRange;
+                      List<Product> productsToShow = products.getRange(startRange, endRange).toList();
+                      return ListView.separated(
+                          shrinkWrap: true,
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(
+                                width: 16,
+                              ),
+                          itemCount: rangeSize,
+                          padding: const EdgeInsets.all(10),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (BuildContext context, int index) {
+                            return counter <= products.length
+                                ? ShowProduct(product: productsToShow[index])
+                                : const SizedBox();
+                          });
                     },
                   )),
               PageViewDotIndicator(
@@ -338,9 +340,7 @@ class _HorizontalProductScrollState extends State<HorizontalProductScroll> {
           totalAmountOfPages: totalAmountOfPages,
           pageController: _pageController,
           onPress: (int newPage) {
-            print(newPage);
             setState(() {
-              selectedPage = newPage;
               _pageController.animateToPage(newPage,
                   duration: 1.seconds, curve: Curves.easeInOutQuad);
             });

@@ -42,8 +42,4 @@ final List<Product> exampleProducts = [
       image: Image.asset("lib/assets/images/bracelets/brace5.png"),
       name: "g",
       priceUSD: 7),
-  Product(
-      image: Image.asset("lib/assets/images/bracelets/brace5.png"),
-      name: "h",
-      priceUSD: 8),
 ];
