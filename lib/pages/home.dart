@@ -168,8 +168,13 @@ class Home extends StatelessWidget {
                 height: 30,
               ),
               ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 1300),
-                child: HorizontalProductScroll(),
+                constraints: BoxConstraints(maxWidth: 1100),
+                child: Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(4, (index) => ShowProduct(product: exampleProducts[index])),
+                  ),
+                ),
               )
             ],
           ),
