@@ -18,18 +18,27 @@ class ImageWithText extends StatelessWidget {
       this.title,
       this.subTitle,
       required this.bodyText,
-      this.button})
+      this.button,
+      this.swapImageAndText})
       : super(key: key);
   final Widget image;
   final String? title;
   final String? subTitle;
   final String bodyText;
   final Widget? button;
+  final bool? swapImageAndText;
 
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     final ColorScheme colorTheme = Theme.of(context).colorScheme;
+
+    final Widget imageWidget = Expanded(
+      child: FittedBox(
+        fit: BoxFit.fitWidth,
+        child: image,
+      ),
+    );
 
     return Center(
       child: SizedBox(
@@ -37,13 +46,11 @@ class ImageWithText extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Expanded(
-                child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: SizedBox(
-                        height: 670, width: 670, child: Placeholder()))),
-            const SizedBox(
-              width: 50,
+            swapImageAndText != true
+                ? imageWidget
+                : SizedBox.shrink(),
+            SizedBox(
+              width: swapImageAndText != true ? 50 : 0,
             ),
             Expanded(
                 child: Column(
@@ -69,6 +76,12 @@ class ImageWithText extends StatelessWidget {
                 button ?? const SizedBox.shrink()
               ],
             )),
+            SizedBox(
+              width: swapImageAndText == true ? 50 : 0,
+            ),
+            swapImageAndText == true
+                ? imageWidget
+                : const SizedBox.shrink(),
           ],
         ),
       ),
@@ -214,12 +227,6 @@ class Home extends StatelessWidget {
         const SizedBox(
           height: contentSpacing,
         ),
-        const Column(
-          children: [Row()],
-        ),
-        const SizedBox(
-          height: contentSpacing,
-        ),
         Center(
           child: SizedBox(
             width: 1400,
@@ -251,6 +258,15 @@ class Home extends StatelessWidget {
               ],
             ),
           ),
+        ),
+        const SizedBox(
+          height: contentSpacing,
+        ),
+        const Column(
+          children: [Row()],
+        ),
+        const SizedBox(
+          height: contentSpacing,
         ),
         const SizedBox(
           height: contentSpacing,
