@@ -22,16 +22,16 @@ class MultiRow extends StatelessWidget {
           child: Column(
             children: List.generate(
                 3,
-                    (index) => Padding(
-                  padding: EdgeInsets.only(bottom: index != 3 ? 40 : 0),
-                  child: ImageWithText(
-                      image: const Placeholder(),
-                      swapImageAndText: index % 2 == 0,
-                      title: "Row",
-                      subTitle: "Caption",
-                      bodyText:
-                      "Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review."),
-                )),
+                (index) => Padding(
+                      padding: EdgeInsets.only(bottom: index != 3 ? 40 : 0),
+                      child: ImageWithText(
+                          image: const Placeholder(),
+                          swapImageAndText: index % 2 == 0,
+                          title: "Row",
+                          subTitle: "Caption",
+                          bodyText:
+                              "Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review."),
+                    )),
           ),
         ),
       ],
@@ -39,6 +39,87 @@ class MultiRow extends StatelessWidget {
   }
 }
 
+class ImageBanner extends StatelessWidget {
+  const ImageBanner({Key? key, required this.image, this.title, this.subtitle, this.buttonText, this.onButtonPressed, this.onArrowPress}) : super(key: key);
+  final Widget image;
+  final String? title;
+  final String? subtitle;
+  final String? buttonText;
+  final Function()? onButtonPressed;
+  final Function()? onArrowPress;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
+    return Container(
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Stack(
+            children: [
+              Positioned.fill(child: image),
+              Positioned.fill(
+                child: Opacity(
+                  opacity: 0.5,
+                  child: Container(
+                    color: Colors.black,
+                  ),
+                ),
+              )
+            ],
+          ),
+          SizedBox(
+            width: 700,
+            child: Column(
+              children: [
+                const Spacer(flex: 7),
+                Text(
+                  title ?? "",
+                  textAlign: TextAlign.center,
+                  style: textTheme.headlineLarge!.copyWith(color: Colors.white),
+                ),
+
+                Text(
+                  subtitle ?? "",
+                  textAlign: TextAlign.center,
+                  style: textTheme.headlineSmall!.copyWith(color: Colors.white),
+                ),
+                const Spacer(
+                  flex: 1,
+                ),
+                buttonText != null ?
+                PrimaryButton(
+                  customColors: CustomPrimaryButtonDecoration(
+                    primaryBackgroundColor: Colors.transparent,
+                    primaryForegroundColor: Colors.white,
+                    primaryBorderColor: Colors.white,
+                    secondaryBackgroundColor: Colors.white,
+                    secondaryForegroundColor: Colors.black,
+                    secondaryBorderColor: Colors.transparent,
+                  ),
+                  text: buttonText!,
+                  onTap: () => onButtonPressed,
+                ) : const SizedBox.shrink(),
+                onArrowPress != null ?
+                IconButton(
+                    onPressed: () => onArrowPress,
+                    icon: Icon(
+                      Icons.keyboard_arrow_down_sharp,
+                      color: colorScheme.inversePrimary,
+                    )) : const SizedBox.shrink(),
+                const Spacer(
+                  flex: 1,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class ImageWithText extends StatelessWidget {
   const ImageWithText(
@@ -125,86 +206,18 @@ class Home extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          height: 720,
-          width: double.infinity,
-          child: Container(
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Stack(
-                  children: [
-                    Positioned.fill(
-                      child: Image.asset(
-                        "lib/assets/images/about_images/wood-tree.png",
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Positioned.fill(
-                      child: Opacity(
-                        opacity: 0.5,
-                        child: Container(
-                          color: Colors.black,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  width: 700,
-                  child: Column(
-                    children: [
-                      const Spacer(flex: 6),
-                      Image.asset("lib/assets/images/logo/noble-only-text.png"),
-                      const Spacer(flex: 6),
-                      Text(
-                        "Sophistication Unveiled, Nobility Redefined"
-                            .toUpperCase(),
-                        textAlign: TextAlign.center,
-                        style: textTheme.headlineLarge!
-                            .copyWith(color: Colors.white),
-                      ),
-                      const Spacer(
-                        flex: 1,
-                      ),
-                      Text(
-                        "Elevate your style with our high-quality, high-status bracelets. Make a statement of sophistication and class."
-                            .toUpperCase(),
-                        textAlign: TextAlign.center,
-                        style: textTheme.headlineSmall!
-                            .copyWith(color: Colors.white),
-                      ),
-                      const Spacer(
-                        flex: 2,
-                      ),
-                      PrimaryButton(
-                        customColors: CustomPrimaryButtonDecoration(
-                          primaryBackgroundColor: Colors.transparent,
-                          primaryForegroundColor: Colors.white,
-                          primaryBorderColor: Colors.white,
-                          secondaryBackgroundColor: Colors.white,
-                          secondaryForegroundColor: Colors.black,
-                          secondaryBorderColor: Colors.transparent,
-                        ),
-                        text: "What's new".toUpperCase(),
-                        onTap: () {},
-                      ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.keyboard_arrow_down_sharp,
-                            color: colorScheme.inversePrimary,
-                          )),
-                      const Spacer(
-                        flex: 6,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        SizedBox(
+            height: 720,
+            child: ImageBanner(
+              title: "Sophistication Unveiled, Nobility Redefined".toUpperCase(),
+              subtitle: "Elevate your style with our high-quality, high-status bracelets. Make a statement of sophistication and class.".toUpperCase(),
+              buttonText: "Shop Now".toUpperCase(),
+              onArrowPress: (){},
+              image: Image.asset(
+                "lib/assets/images/about_images/wood-tree.png",
+                fit: BoxFit.cover,
+              ),
+            )),
         const SizedBox(
           height: contentSpacing,
         ),
@@ -296,6 +309,20 @@ class Home extends StatelessWidget {
           height: 36,
         ),
         const MultiRow(),
+        const SizedBox(
+          height: contentSpacing,
+        ),
+        SizedBox(
+            height: 560,
+            child: ImageBanner(
+              title: "We are noble".toUpperCase(),
+              subtitle: "found out who we are and what we stand for".toUpperCase(),
+              buttonText: "About us".toUpperCase(),
+              image: Image.asset(
+                "lib/assets/images/about_images/handshake.png",
+                fit: BoxFit.cover,
+              ),
+            )),
         const SizedBox(
           height: contentSpacing,
         ),
