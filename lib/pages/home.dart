@@ -11,6 +11,35 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../models/product.dart';
 import '../widgets/show_product.dart';
 
+class MultiRow extends StatelessWidget {
+  const MultiRow({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Center(
+          child: Column(
+            children: List.generate(
+                3,
+                    (index) => Padding(
+                  padding: EdgeInsets.only(bottom: index != 3 ? 40 : 0),
+                  child: ImageWithText(
+                      image: const Placeholder(),
+                      swapImageAndText: index % 2 == 0,
+                      title: "Row",
+                      subTitle: "Caption",
+                      bodyText:
+                      "Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review."),
+                )),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+
 class ImageWithText extends StatelessWidget {
   const ImageWithText(
       {Key? key,
@@ -34,56 +63,50 @@ class ImageWithText extends StatelessWidget {
     final ColorScheme colorTheme = Theme.of(context).colorScheme;
 
     final Widget imageWidget = Expanded(
-      child: FittedBox(
-        fit: BoxFit.fitWidth,
-        child: image,
-      ),
+      child: FittedBox(fit: BoxFit.contain, child: image),
     );
 
-    return Center(
-      child: SizedBox(
-        width: 1100,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            swapImageAndText != true
-                ? imageWidget
-                : SizedBox.shrink(),
-            SizedBox(
-              width: swapImageAndText != true ? 50 : 0,
-            ),
-            Expanded(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                subTitle != null
-                    ? Text(
-                        subTitle!,
-                        style: textTheme.headlineSmall!.copyWith(
-                            color: colorTheme.primary.withOpacity(0.5)),
-                      )
-                    : SizedBox.shrink(),
-                title != null
-                    ? Text(
-                        title!,
-                        style: textTheme.headlineLarge,
-                      )
-                    : const SizedBox.shrink(),
-                Text(bodyText),
-                const SizedBox(
-                  height: 30,
-                ),
-                button ?? const SizedBox.shrink()
-              ],
-            )),
-            SizedBox(
-              width: swapImageAndText == true ? 50 : 0,
-            ),
-            swapImageAndText == true
-                ? imageWidget
-                : const SizedBox.shrink(),
-          ],
-        ),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(
+        maxWidth: 1100,
+        maxHeight: 458,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          swapImageAndText != true ? imageWidget : SizedBox.shrink(),
+          SizedBox(
+            width: swapImageAndText != true ? 50 : 0,
+          ),
+          Expanded(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              subTitle != null
+                  ? Text(
+                      subTitle!,
+                      style: textTheme.headlineSmall!
+                          .copyWith(color: colorTheme.primary.withOpacity(0.5)),
+                    )
+                  : SizedBox.shrink(),
+              title != null
+                  ? Text(
+                      title!,
+                      style: textTheme.headlineLarge,
+                    )
+                  : const SizedBox.shrink(),
+              Text(bodyText),
+              const SizedBox(
+                height: 30,
+              ),
+              button ?? const SizedBox.shrink()
+            ],
+          )),
+          SizedBox(
+            width: swapImageAndText == true ? 50 : 0,
+          ),
+          swapImageAndText == true ? imageWidget : const SizedBox.shrink(),
+        ],
       ),
     );
   }
@@ -213,80 +236,66 @@ class Home extends StatelessWidget {
         const SizedBox(
           height: contentSpacing,
         ),
-        ImageWithText(
-          image: const Placeholder(),
-          bodyText:
-              '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla',
-          title: 'COLLECTION “Victorian Nobility” COMING SOON'.toUpperCase(),
-          button: PrimaryButton(
-            outlined: true,
-            text: "Early Acess".toUpperCase(),
-            onTap: () {},
-          ),
-        ),
-        const SizedBox(
-          height: contentSpacing,
-        ),
         Center(
-          child: SizedBox(
-            width: 1400,
-            child: Column(
-              children: [
-                Text(
-                  "Collections".toUpperCase(),
-                  style: textTheme.headlineLarge,
-                ),
-                const SizedBox(
-                  height: 36,
-                ),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(
-                        3,
-                        (index) => Column(
-                              children: [
-                                const Placeholder(),
-                                PrimaryButton(
-                                  text: "Noble Origins".toUpperCase(),
-                                  onTap: () {},
-                                  onlyUnderline: true,
-                                  outlined: true,
-                                  trailingIcon: Icons.chevron_right,
-                                )
-                              ],
-                            )))
-              ],
+          child: ImageWithText(
+            image:
+                SizedBox(width: 100, height: 100, child: const Placeholder()),
+            bodyText:
+                '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla',
+            title: 'COLLECTION “Victorian Nobility” COMING SOON'.toUpperCase(),
+            button: PrimaryButton(
+              outlined: true,
+              text: "Early Acess".toUpperCase(),
+              onTap: () {},
             ),
           ),
         ),
         const SizedBox(
           height: contentSpacing,
         ),
-        const Column(
-          children: [Row()],
-        ),
-        const SizedBox(
-          height: contentSpacing,
-        ),
-        const SizedBox(
-          height: contentSpacing,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kPagePadding),
-          child: Row(
-            children: [
-              SizedBox(
-                child: SvgPicture.asset(
-                    "lib/assets/images/logo/logo-vertical.svg"),
-              ),
-              Expanded(
-                child: SvgPicture.asset(
-                    "lib/assets/images/logo/logo-with-text.svg"),
-              ),
-              SvgPicture.asset("lib/assets/images/logo/logo-vertical.svg"),
-            ],
+        Center(
+          child: Text(
+            "Collections".toUpperCase(),
+            style: textTheme.headlineLarge,
           ),
         ),
+        const SizedBox(
+          height: 36,
+        ),
+        Center(
+          child: SizedBox(
+            width: 1400,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: List.generate(
+                    3,
+                    (index) => Column(
+                          children: [
+                            const Placeholder(),
+                            PrimaryButton(
+                              text: "Noble Origins".toUpperCase(),
+                              onTap: () {},
+                              onlyUnderline: true,
+                              outlined: true,
+                              trailingIcon: Icons.chevron_right,
+                            )
+                          ],
+                        ))),
+          ),
+        ),
+        const SizedBox(
+          height: contentSpacing,
+        ),
+        Center(
+          child: Text(
+            "New arrivals".toUpperCase(),
+            style: textTheme.headlineLarge,
+          ),
+        ),
+        const SizedBox(
+          height: 36,
+        ),
+        const MultiRow(),
         const SizedBox(
           height: contentSpacing,
         ),
