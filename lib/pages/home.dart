@@ -14,11 +14,12 @@ import '../widgets/show_product.dart';
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
-  static const double contentSpacing = 250;
+  static const double contentSpacing = 100;
 
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +71,7 @@ class Home extends StatelessWidget {
                         style: textTheme.headlineSmall!
                             .copyWith(color: Colors.white),
                       ),
-                      Spacer(flex: 1,),
+                      Spacer(flex: 2,),
                       PrimaryButton(
                         customColors: CustomPrimaryButtonDecoration(
                           primaryBackgroundColor: Colors.transparent,
@@ -80,9 +81,10 @@ class Home extends StatelessWidget {
                           secondaryForegroundColor: Colors.black,
                           secondaryBorderColor: Colors.transparent,
                         ),
-                        text: "Shop Now".toUpperCase(),
+                        text: "What's new".toUpperCase(),
                         onTap: () {},
                       ),
+                      IconButton(onPressed: (){}, icon: Icon(Icons.keyboard_arrow_down_sharp,color: colorScheme.inversePrimary,)),
                       Spacer(flex: 6,),
                     ],
                   ),
@@ -91,6 +93,33 @@ class Home extends StatelessWidget {
             ),
           ),
         ),
+        SizedBox(height: contentSpacing,),
+        Column(
+          children: [
+            Center(
+                child: Text("Most popular".toUpperCase(),
+                    style: Theme.of(context).textTheme.headlineLarge!)),
+            Center(
+                child: Text(
+                  "Discover the Irresistible Favorites: Unmatched in Quality and Admired by All!",
+                  style: Theme.of(context).textTheme.bodyMedium!,
+                )),
+            const SizedBox(
+              height: 30,
+            ),
+            ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 1100),
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(4,
+                          (index) => ShowProduct(product: exampleProducts[index])),
+                ),
+              ),
+            )
+          ],
+        ),
+        SizedBox(height: contentSpacing,),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: kPagePadding),
           child: Row(
@@ -214,31 +243,6 @@ class Home extends StatelessWidget {
         ),
         const SizedBox(
           height: contentSpacing,
-        ),
-        Column(
-          children: [
-            Center(
-                child: Text("Most popular".toUpperCase(),
-                    style: Theme.of(context).textTheme.headlineLarge!)),
-            Center(
-                child: Text(
-              "Discover the Irresistible Favorites: Unmatched in Quality and Admired by All!",
-              style: Theme.of(context).textTheme.bodyMedium!,
-            )),
-            const SizedBox(
-              height: 30,
-            ),
-            ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 1100),
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(4,
-                      (index) => ShowProduct(product: exampleProducts[index])),
-                ),
-              ),
-            )
-          ],
         ),
         Center(
           child: SizedBox(
