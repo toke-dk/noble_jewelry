@@ -11,6 +11,71 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../models/product.dart';
 import '../widgets/show_product.dart';
 
+class ImageWithText extends StatelessWidget {
+  const ImageWithText(
+      {Key? key,
+      required this.image,
+      this.title,
+      this.subTitle,
+      required this.bodyText,
+      this.button})
+      : super(key: key);
+  final Widget image;
+  final String? title;
+  final String? subTitle;
+  final String bodyText;
+  final Widget? button;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final ColorScheme colorTheme = Theme.of(context).colorScheme;
+
+    return Center(
+      child: SizedBox(
+        width: 1100,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Expanded(
+                child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: SizedBox(
+                        height: 670, width: 670, child: Placeholder()))),
+            const SizedBox(
+              width: 50,
+            ),
+            Expanded(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                subTitle != null
+                    ? Text(
+                        subTitle!,
+                        style: textTheme.headlineSmall!.copyWith(
+                            color: colorTheme.primary.withOpacity(0.5)),
+                      )
+                    : SizedBox.shrink(),
+                title != null
+                    ? Text(
+                        title!,
+                        style: textTheme.headlineLarge,
+                      )
+                    : const SizedBox.shrink(),
+                Text(bodyText),
+                const SizedBox(
+                  height: 30,
+                ),
+                button ?? const SizedBox.shrink()
+              ],
+            )),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -135,44 +200,22 @@ class Home extends StatelessWidget {
         const SizedBox(
           height: contentSpacing,
         ),
-        Center(
-          child: SizedBox(
-            width: 1100,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Expanded(
-                    child: FittedBox(
-                        fit: BoxFit.fitWidth,
-                        child: SizedBox(
-                            height: 670, width: 670, child: Placeholder()))),
-                const SizedBox(
-                  width: 50,
-                ),
-                Expanded(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'COLLECTION “Victorian Nobility” COMING SOON'
-                          .toUpperCase(),
-                      style: textTheme.headlineLarge,
-                    ),
-                    const Text(
-                        '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla'),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    PrimaryButton(
-                      text: "Sign up for early purchase".toUpperCase(),
-                      onTap: () {},
-                      outlined: true,
-                    )
-                  ],
-                )),
-              ],
-            ),
+        ImageWithText(
+          image: const Placeholder(),
+          bodyText:
+              '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla',
+          title: 'COLLECTION “Victorian Nobility” COMING SOON'.toUpperCase(),
+          button: PrimaryButton(
+            outlined: true,
+            text: "Early Acess".toUpperCase(),
+            onTap: () {},
           ),
+        ),
+        const SizedBox(
+          height: contentSpacing,
+        ),
+        const Column(
+          children: [Row()],
         ),
         const SizedBox(
           height: contentSpacing,
@@ -186,16 +229,16 @@ class Home extends StatelessWidget {
                   "Collections".toUpperCase(),
                   style: textTheme.headlineLarge,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 36,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: List.generate(
                         3,
                         (index) => Column(
                               children: [
-                                Placeholder(),
+                                const Placeholder(),
                                 PrimaryButton(
                                   text: "Noble Origins".toUpperCase(),
                                   onTap: () {},
