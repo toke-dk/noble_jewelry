@@ -1,8 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:noble_jewelry/shared/textfield.dart';
 import 'package:noble_jewelry/shared/variables.dart';
 
 import '../shared/buttons.dart';
+
+class SubscribeToNewsLetter extends StatelessWidget {
+  const SubscribeToNewsLetter({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      color: Theme.of(context).colorScheme.primary.withOpacity(0.04),
+      child: Align(
+        child: SizedBox(
+          width: 1100,
+          child: IntrinsicHeight(
+            child: Padding(
+              padding: const EdgeInsets.all(50),
+              child: Row(
+                children: [
+                  const SizedBox(
+                      width: 400,
+                      height: 49,
+                      child: PrimaryTextField(
+                          labelText: "Subscribe to our newsletter")),
+                  SizedBox(
+                    width: 60,
+                    height: 49,
+                    child: FittedBox(
+                      fit: BoxFit.fitHeight,
+                      child: PrimaryButton(
+                        text: "",
+                        onTap: () {},
+                        trailingIcon: Icons.chevron_right,
+                      ),
+                    ),
+                  ),
+                  VerticalDivider(
+                    width: 100,
+                  ),
+                  Expanded(child: Text("data")),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class PageTitleText extends StatelessWidget {
   const PageTitleText({Key? key, required this.titleText, this.subWidget})

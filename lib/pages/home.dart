@@ -202,6 +202,14 @@ class Home extends StatelessWidget {
           height: contentSpacing,
         ),
 
+        /// SUBSCRIBE TO NEWSLETTER
+        const Center(
+          child: SubscribeToNewsLetter(),
+        ),
+        const SizedBox(
+          height: contentSpacing,
+        ),
+
         Center(
           child: PrimaryButton(
             text: "Become a part of the community".toUpperCase(),
