@@ -18,6 +18,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -26,13 +28,14 @@ class Home extends StatelessWidget {
           width: double.infinity,
           child: Container(
             child: Stack(
+              alignment: Alignment.center,
               children: [
                 Stack(
                   children: [
                     Positioned.fill(
                       child: Image.asset(
-                        "lib/assets/images/about_images/wood-tree.png", fit: BoxFit
-                        .cover,
+                        "lib/assets/images/about_images/wood-tree.png",
+                        fit: BoxFit.cover,
                       ),
                     ),
                     Positioned.fill(
@@ -45,11 +48,43 @@ class Home extends StatelessWidget {
                     )
                   ],
                 ),
-                Positioned(
-                  top: 20.0,
-                  left: 20.0,
-                  child: Text(
-                    'Your Text Here',
+                SizedBox(
+                  width: 700,
+                  child: Column(
+                    children: [
+                      Spacer(flex: 6),
+                      Image.asset("lib/assets/images/logo/noble-only-text.png"),
+                      Spacer(flex: 6),
+                      Text(
+                        "Sophistication Unveiled, Nobility Redefined"
+                            .toUpperCase(),
+                        textAlign: TextAlign.center,
+                        style: textTheme.headlineLarge!
+                            .copyWith(color: Colors.white),
+                      ),
+                      Spacer(flex: 1,),
+                      Text(
+                        "Elevate your style with our high-quality, high-status bracelets. Make a statement of sophistication and class."
+                            .toUpperCase(),
+                        textAlign: TextAlign.center,
+                        style: textTheme.headlineSmall!
+                            .copyWith(color: Colors.white),
+                      ),
+                      Spacer(flex: 1,),
+                      PrimaryButton(
+                        customColors: CustomPrimaryButtonDecoration(
+                          primaryBackgroundColor: Colors.transparent,
+                          primaryForegroundColor: Colors.white,
+                          primaryBorderColor: Colors.white,
+                          secondaryBackgroundColor: Colors.white,
+                          secondaryForegroundColor: Colors.black,
+                          secondaryBorderColor: Colors.transparent,
+                        ),
+                        text: "Shop Now".toUpperCase(),
+                        onTap: () {},
+                      ),
+                      Spacer(flex: 6,),
+                    ],
                   ),
                 ),
               ],
@@ -94,19 +129,13 @@ class Home extends StatelessWidget {
                       children: [
                         Text(
                           "Nature's finesse on your wrist".toUpperCase(),
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .headlineSmall,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         Text(
                           "Explore Our High-Quality Wooden Bracelets"
                               .toUpperCase(),
                           overflow: TextOverflow.clip,
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .headlineLarge,
+                          style: Theme.of(context).textTheme.headlineLarge,
                         ),
                         PrimaryButton(
                           text: "shop now".toUpperCase(),
@@ -140,18 +169,12 @@ class Home extends StatelessWidget {
                       children: [
                         Text(
                           'Collection "시작" coming soon'.toUpperCase(),
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .headlineLarge,
+                          style: Theme.of(context).textTheme.headlineLarge,
                         ),
                         Text(
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla",
                           overflow: TextOverflow.clip,
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .bodyMedium,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         PrimaryButton(
                           outlined: true,
@@ -196,18 +219,12 @@ class Home extends StatelessWidget {
           children: [
             Center(
                 child: Text("Most popular".toUpperCase(),
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .headlineLarge!)),
+                    style: Theme.of(context).textTheme.headlineLarge!)),
             Center(
                 child: Text(
-                  "Discover the Irresistible Favorites: Unmatched in Quality and Admired by All!",
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium!,
-                )),
+              "Discover the Irresistible Favorites: Unmatched in Quality and Admired by All!",
+              style: Theme.of(context).textTheme.bodyMedium!,
+            )),
             const SizedBox(
               height: 30,
             ),
@@ -217,8 +234,7 @@ class Home extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: List.generate(4,
-                          (index) =>
-                          ShowProduct(product: exampleProducts[index])),
+                      (index) => ShowProduct(product: exampleProducts[index])),
                 ),
               ),
             )
@@ -242,10 +258,7 @@ class Home extends StatelessWidget {
                         children: [
                           Text(
                             "About Us".toUpperCase(),
-                            style: Theme
-                                .of(context)
-                                .textTheme
-                                .headlineLarge,
+                            style: Theme.of(context).textTheme.headlineLarge,
                           ),
                           PrimaryButton(
                               text: "About page".toUpperCase(), onTap: () {})
@@ -280,10 +293,7 @@ class Home extends StatelessWidget {
                         children: [
                           Text(
                             "Contact Us".toUpperCase(),
-                            style: Theme
-                                .of(context)
-                                .textTheme
-                                .headlineLarge,
+                            style: Theme.of(context).textTheme.headlineLarge,
                           ),
                           PrimaryButton(
                               text: "Contact page".toUpperCase(), onTap: () {})

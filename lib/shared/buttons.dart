@@ -9,6 +9,7 @@ class PrimaryButton extends StatefulWidget {
       required this.onTap,
       this.outlined,
       this.icon,
+      this.customColors,
       this.onlyUnderline,
       this.initUnderline})
       : super(key: key);
@@ -18,6 +19,7 @@ class PrimaryButton extends StatefulWidget {
   final IconData? icon;
   final bool? onlyUnderline;
   final bool? initUnderline;
+  final CustomPrimaryButtonDecoration? customColors;
 
   @override
   State<PrimaryButton> createState() => _PrimaryButtonState();
@@ -30,30 +32,34 @@ class _PrimaryButtonState extends State<PrimaryButton> {
   late Color borderColor;
   late Color textColor;
 
-  late final Color initBackGroundColor = widget.outlined == true
-      ? Theme.of(context).colorScheme.inversePrimary
-      : Theme.of(context).colorScheme.primary;
-  late final Color initForeGroundColor = widget.outlined == true
-      ? Theme.of(context).colorScheme.primary
-      : Theme.of(context).colorScheme.inversePrimary;
-  late final Color initBorderColor = Theme.of(context).colorScheme.primary;
+  late final Color initBackGroundColor =
+      widget.customColors?.primaryBackgroundColor ??
+          (widget.outlined == true
+              ? Theme.of(context).colorScheme.inversePrimary
+              : Theme.of(context).colorScheme.primary);
+  late final Color initForeGroundColor =
+      widget.customColors?.primaryForegroundColor ??
+          (widget.outlined == true
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.inversePrimary);
+  late final Color initBorderColor = widget.customColors?.primaryBorderColor ??
+      Theme.of(context).colorScheme.primary;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    backGroundColor = initBackGroundColor;
-    foreGroundColor = initForeGroundColor;
-    borderColor = initBorderColor;
-    textColor = initForeGroundColor;
+    textColor = widget.customColors?.primaryForegroundColor ?? initForeGroundColor;
   }
 
   void changeTextColor() {
     if (widget.onlyUnderline == true)
       return;
     else if (onHover) {
-      textColor = initBackGroundColor;
+      textColor =
+          widget.customColors?.secondaryForegroundColor ?? initBackGroundColor;
     } else {
-      textColor = initForeGroundColor;
+      textColor =
+          widget.customColors?.primaryForegroundColor ?? initForeGroundColor;
     }
     setState(() {
       textColor;
@@ -176,4 +182,21 @@ class _PrimaryButtonState extends State<PrimaryButton> {
       ),
     );
   }
+}
+
+class CustomPrimaryButtonDecoration {
+  final Color primaryForegroundColor;
+  final Color primaryBackgroundColor;
+  final Color primaryBorderColor;
+  final Color secondaryForegroundColor;
+  final Color secondaryBackgroundColor;
+  final Color secondaryBorderColor;
+
+  CustomPrimaryButtonDecoration(
+      {required this.primaryForegroundColor,
+      required this.primaryBackgroundColor,
+      required this.primaryBorderColor,
+      required this.secondaryForegroundColor,
+      required this.secondaryBackgroundColor,
+      required this.secondaryBorderColor});
 }
