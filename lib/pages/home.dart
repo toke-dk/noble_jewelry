@@ -18,6 +18,8 @@ class Home extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+
+        /// TOPBANNER
         SizedBox(
             height: 720,
             child: ImageBanner(
@@ -33,6 +35,8 @@ class Home extends StatelessWidget {
         const SizedBox(
           height: contentSpacing,
         ),
+
+        /// MOST POPULAR PRODUCTS
         Column(
           children: [
             Center(
@@ -61,6 +65,8 @@ class Home extends StatelessWidget {
         const SizedBox(
           height: contentSpacing,
         ),
+
+        /// NEW COLLECTION SECTION
         Center(
           child: ImageWithText(
             image:
@@ -78,9 +84,11 @@ class Home extends StatelessWidget {
         const SizedBox(
           height: contentSpacing,
         ),
+
+        /// FEATURED COLLECTION SECTION
         Center(
           child: Text(
-            "Collections".toUpperCase(),
+            "FEATURED COLLECTION".toUpperCase(),
             style: textTheme.headlineLarge,
           ),
         ),
@@ -111,6 +119,8 @@ class Home extends StatelessWidget {
         const SizedBox(
           height: contentSpacing,
         ),
+
+        /// NEW ARRIVALS SECTION
         Center(
           child: Text(
             "New arrivals".toUpperCase(),
@@ -124,6 +134,8 @@ class Home extends StatelessWidget {
         const SizedBox(
           height: contentSpacing,
         ),
+
+        /// WE ARE NOBLE BANNER
         SizedBox(
             height: 560,
             child: ImageBanner(
@@ -138,6 +150,8 @@ class Home extends StatelessWidget {
         const SizedBox(
           height: contentSpacing,
         ),
+
+
         Center(
           child: Container(
             child: Row(
