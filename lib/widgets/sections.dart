@@ -1,6 +1,92 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:noble_jewelry/shared/variables.dart';
 
 import '../shared/buttons.dart';
+
+class HoverScaleWidget extends StatefulWidget {
+  const HoverScaleWidget({Key? key, required this.child, this.onTap})
+      : super(key: key);
+  final Widget child;
+  final Function()? onTap;
+
+  @override
+  State<HoverScaleWidget> createState() => _HoverScaleWidgetState();
+}
+
+class _HoverScaleWidgetState extends State<HoverScaleWidget> {
+  bool isHovering = false;
+  final double scaleFactor = 1.007;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      hoverColor: Colors.transparent,
+      onTap: () => widget.onTap,
+      onHover: (val) => setState(() {
+        isHovering = val;
+      }),
+      child: widget.child.animate(target: isHovering ? 1 : 0).scale(
+          delay: kAnimationDelay,
+          duration: kAnimationSpeed,
+          begin: Offset(1, 1),
+          end: Offset(scaleFactor, scaleFactor)),
+    );
+  }
+}
+
+class MultiColumnSection {
+  final String? title;
+  final String? bodyText;
+
+  MultiColumnSection({this.title, this.bodyText});
+}
+
+class MultiColumn extends StatefulWidget {
+  const MultiColumn({Key? key, required this.sections}) : super(key: key);
+  final List<MultiColumnSection> sections;
+
+  @override
+  State<MultiColumn> createState() => _MultiColumnState();
+}
+
+class _MultiColumnState extends State<MultiColumn> {
+  @override
+  Widget build(BuildContext context) {
+    return HoverScaleWidget(
+      child: Container(
+        width: 1100,
+        child: IntrinsicHeight(
+          child: Row(
+            children: List.generate(widget.sections.length, (index) {
+              final currentSection = widget.sections[index];
+              return Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
+                  child: Container(
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.04),
+                    padding: const EdgeInsets.all(25),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          currentSection.title ?? "",
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(currentSection.bodyText ?? "")
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }),
+          ),
+        ),
+      ).animate(),
+    );
+  }
+}
 
 class MultiRow extends StatelessWidget {
   const MultiRow({Key? key}) : super(key: key);
@@ -13,16 +99,16 @@ class MultiRow extends StatelessWidget {
           child: Column(
             children: List.generate(
                 3,
-                    (index) => Padding(
-                  padding: EdgeInsets.only(bottom: index != 3 ? 40 : 0),
-                  child: ImageWithText(
-                      image: const Placeholder(),
-                      swapImageAndText: index % 2 == 0,
-                      title: "Row",
-                      subTitle: "Caption",
-                      bodyText:
-                      "Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review."),
-                )),
+                (index) => Padding(
+                      padding: EdgeInsets.only(bottom: index != 3 ? 40 : 0),
+                      child: ImageWithText(
+                          image: const Placeholder(),
+                          swapImageAndText: index % 2 == 0,
+                          title: "Row",
+                          subTitle: "Caption",
+                          bodyText:
+                              "Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review."),
+                    )),
           ),
         ),
       ],
@@ -31,7 +117,15 @@ class MultiRow extends StatelessWidget {
 }
 
 class ImageBanner extends StatelessWidget {
-  const ImageBanner({Key? key, required this.image, this.title, this.subtitle, this.buttonText, this.onButtonPressed, this.onArrowPress}) : super(key: key);
+  const ImageBanner(
+      {Key? key,
+      required this.image,
+      this.title,
+      this.subtitle,
+      this.buttonText,
+      this.onButtonPressed,
+      this.onArrowPress})
+      : super(key: key);
   final Widget image;
   final String? title;
   final String? subtitle;
@@ -71,7 +165,6 @@ class ImageBanner extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: textTheme.headlineLarge!.copyWith(color: Colors.white),
                 ),
-
                 Text(
                   subtitle ?? "",
                   textAlign: TextAlign.center,
@@ -80,26 +173,28 @@ class ImageBanner extends StatelessWidget {
                 const Spacer(
                   flex: 1,
                 ),
-                buttonText != null ?
-                PrimaryButton(
-                  customColors: CustomPrimaryButtonDecoration(
-                    primaryBackgroundColor: Colors.transparent,
-                    primaryForegroundColor: Colors.white,
-                    primaryBorderColor: Colors.white,
-                    secondaryBackgroundColor: Colors.white,
-                    secondaryForegroundColor: Colors.black,
-                    secondaryBorderColor: Colors.transparent,
-                  ),
-                  text: buttonText!,
-                  onTap: () => onButtonPressed,
-                ) : const SizedBox.shrink(),
-                onArrowPress != null ?
-                IconButton(
-                    onPressed: () => onArrowPress,
-                    icon: Icon(
-                      Icons.keyboard_arrow_down_sharp,
-                      color: colorScheme.inversePrimary,
-                    )) : const SizedBox.shrink(),
+                buttonText != null
+                    ? PrimaryButton(
+                        customColors: CustomPrimaryButtonDecoration(
+                          primaryBackgroundColor: Colors.transparent,
+                          primaryForegroundColor: Colors.white,
+                          primaryBorderColor: Colors.white,
+                          secondaryBackgroundColor: Colors.white,
+                          secondaryForegroundColor: Colors.black,
+                          secondaryBorderColor: Colors.transparent,
+                        ),
+                        text: buttonText!,
+                        onTap: () => onButtonPressed,
+                      )
+                    : const SizedBox.shrink(),
+                onArrowPress != null
+                    ? IconButton(
+                        onPressed: () => onArrowPress,
+                        icon: Icon(
+                          Icons.keyboard_arrow_down_sharp,
+                          color: colorScheme.inversePrimary,
+                        ))
+                    : const SizedBox.shrink(),
                 const Spacer(
                   flex: 1,
                 ),
@@ -115,12 +210,12 @@ class ImageBanner extends StatelessWidget {
 class ImageWithText extends StatelessWidget {
   const ImageWithText(
       {Key? key,
-        required this.image,
-        this.title,
-        this.subTitle,
-        required this.bodyText,
-        this.button,
-        this.swapImageAndText})
+      required this.image,
+      this.title,
+      this.subTitle,
+      required this.bodyText,
+      this.button,
+      this.swapImageAndText})
       : super(key: key);
   final Widget image;
   final String? title;
@@ -146,34 +241,34 @@ class ImageWithText extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          swapImageAndText != true ? imageWidget : SizedBox.shrink(),
+          swapImageAndText != true ? imageWidget : const SizedBox.shrink(),
           SizedBox(
             width: swapImageAndText != true ? 50 : 0,
           ),
           Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  subTitle != null
-                      ? Text(
-                    subTitle!,
-                    style: textTheme.headlineSmall!
-                        .copyWith(color: colorTheme.primary.withOpacity(0.5)),
-                  )
-                      : SizedBox.shrink(),
-                  title != null
-                      ? Text(
-                    title!,
-                    style: textTheme.headlineLarge,
-                  )
-                      : const SizedBox.shrink(),
-                  Text(bodyText),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  button ?? const SizedBox.shrink()
-                ],
-              )),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              subTitle != null
+                  ? Text(
+                      subTitle!,
+                      style: textTheme.headlineSmall!
+                          .copyWith(color: colorTheme.primary.withOpacity(0.5)),
+                    )
+                  : const SizedBox.shrink(),
+              title != null
+                  ? Text(
+                      title!,
+                      style: textTheme.headlineLarge,
+                    )
+                  : const SizedBox.shrink(),
+              Text(bodyText),
+              const SizedBox(
+                height: 30,
+              ),
+              button ?? const SizedBox.shrink()
+            ],
+          )),
           SizedBox(
             width: swapImageAndText == true ? 50 : 0,
           ),

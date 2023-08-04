@@ -18,15 +18,17 @@ class Home extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         /// TOPBANNER
         SizedBox(
             height: 720,
             child: ImageBanner(
-              title: "Sophistication Unveiled, Nobility Redefined".toUpperCase(),
-              subtitle: "Elevate your style with our high-quality, high-status bracelets. Make a statement of sophistication and class.".toUpperCase(),
+              title:
+                  "Sophistication Unveiled, Nobility Redefined".toUpperCase(),
+              subtitle:
+                  "Elevate your style with our high-quality, high-status bracelets. Make a statement of sophistication and class."
+                      .toUpperCase(),
               buttonText: "Shop Now".toUpperCase(),
-              onArrowPress: (){},
+              onArrowPress: () {},
               image: Image.asset(
                 "lib/assets/images/about_images/wood-tree.png",
                 fit: BoxFit.cover,
@@ -70,7 +72,7 @@ class Home extends StatelessWidget {
         Center(
           child: ImageWithText(
             image:
-                SizedBox(width: 100, height: 100, child: const Placeholder()),
+                const SizedBox(width: 100, height: 100, child: Placeholder()),
             bodyText:
                 '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla',
             title: 'COLLECTION “Victorian Nobility” COMING SOON'.toUpperCase(),
@@ -140,7 +142,8 @@ class Home extends StatelessWidget {
             height: 560,
             child: ImageBanner(
               title: "We are noble".toUpperCase(),
-              subtitle: "found out who we are and what we stand for".toUpperCase(),
+              subtitle:
+                  "found out who we are and what we stand for".toUpperCase(),
               buttonText: "About us".toUpperCase(),
               image: Image.asset(
                 "lib/assets/images/about_images/handshake.png",
@@ -151,7 +154,46 @@ class Home extends StatelessWidget {
           height: contentSpacing,
         ),
 
-
+        /// COMMUNITY SECTION
+        Center(
+          child: Text(
+            "Community".toUpperCase(),
+            style: textTheme.headlineLarge,
+          ),
+        ),
+        const SizedBox(
+          height: 36,
+        ),
+        Center(
+            child: MultiColumn(
+              sections: [
+                MultiColumnSection(
+                    title: "Building a Strong Foundation through Valued Customers",
+                    bodyText:
+                    "Our success is thanks to our valued customers. This community continues to expand, creating a close-knit atmosphere akin to a small family. Our success is thanks to our valued customers. This community continues to expand, creating a close-knit atmosphere akin to a small family."),
+                MultiColumnSection(
+                    title: "Building a Close-Knit Community",
+                    bodyText:
+                    "NOBLE has fostered a thriving community of like-minded individuals. As customers became part of our family, they discovered a space where bonds were forged and friendships flourished. Our community members share not only their love for our brand but also their passions, interests, and aspirations. Through engaging forums, events, and social media platforms, we have created a place where connections are nurtured, making our brand more than just a product, but an enriching lifestyle."),
+                MultiColumnSection(
+                    title: "Empowering Growth Together",
+                    bodyText:
+                    "The synergy between our brand and our community has empowered us to grow and evolve together. We actively seek feedback and suggestions from our community members, valuing their insights as we shape the future of [Brand Name]. Their advocacy and word-of-mouth support have allowed us to expand our family, welcoming new customers who resonate with our shared values. Together, we forge ahead on a journey of growth and success, united by the spirit of community and mutual support"),
+              ],
+            )),
+        Center(
+          child: PrimaryButton(
+            text: "Be a part of the community".toUpperCase(),
+            trailingIcon: Icons.chevron_right,
+            onTap: () {},
+            onlyUnderline: true,
+            outlined: true,
+          ),
+        ),
+        const SizedBox(
+          height: contentSpacing,
+        ),
+        
         Center(
           child: Container(
             child: Row(
