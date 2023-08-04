@@ -113,6 +113,7 @@ class _ShowProductState extends State<ShowProduct> {
                     ),
                     PrimaryButton(
                       outlined: true,
+                      leadingIcon: Icons.shopping_basket,
                       text: 'Discover'.toUpperCase(),
                       onTap: () {},
                     ),

@@ -53,9 +53,9 @@ class Home extends StatelessWidget {
                   width: 700,
                   child: Column(
                     children: [
-                      Spacer(flex: 6),
+                      const Spacer(flex: 6),
                       Image.asset("lib/assets/images/logo/noble-only-text.png"),
-                      Spacer(flex: 6),
+                      const Spacer(flex: 6),
                       Text(
                         "Sophistication Unveiled, Nobility Redefined"
                             .toUpperCase(),
@@ -63,7 +63,9 @@ class Home extends StatelessWidget {
                         style: textTheme.headlineLarge!
                             .copyWith(color: Colors.white),
                       ),
-                      Spacer(flex: 1,),
+                      const Spacer(
+                        flex: 1,
+                      ),
                       Text(
                         "Elevate your style with our high-quality, high-status bracelets. Make a statement of sophistication and class."
                             .toUpperCase(),
@@ -71,7 +73,9 @@ class Home extends StatelessWidget {
                         style: textTheme.headlineSmall!
                             .copyWith(color: Colors.white),
                       ),
-                      Spacer(flex: 2,),
+                      const Spacer(
+                        flex: 2,
+                      ),
                       PrimaryButton(
                         customColors: CustomPrimaryButtonDecoration(
                           primaryBackgroundColor: Colors.transparent,
@@ -84,8 +88,15 @@ class Home extends StatelessWidget {
                         text: "What's new".toUpperCase(),
                         onTap: () {},
                       ),
-                      IconButton(onPressed: (){}, icon: Icon(Icons.keyboard_arrow_down_sharp,color: colorScheme.inversePrimary,)),
-                      Spacer(flex: 6,),
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.keyboard_arrow_down_sharp,
+                            color: colorScheme.inversePrimary,
+                          )),
+                      const Spacer(
+                        flex: 6,
+                      ),
                     ],
                   ),
                 ),
@@ -93,7 +104,9 @@ class Home extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: contentSpacing,),
+        const SizedBox(
+          height: contentSpacing,
+        ),
         Column(
           children: [
             Center(
@@ -101,25 +114,104 @@ class Home extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineLarge!)),
             Center(
                 child: Text(
-                  "Discover the Irresistible Favorites: Unmatched in Quality and Admired by All!",
-                  style: Theme.of(context).textTheme.bodyMedium!,
-                )),
+              "Discover the Irresistible Favorites: Unmatched in Quality and Admired by All!",
+              style: Theme.of(context).textTheme.bodyMedium!,
+            )),
             const SizedBox(
               height: 30,
             ),
             ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 1100),
+              constraints: const BoxConstraints(maxWidth: 1100),
               child: Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: List.generate(4,
-                          (index) => ShowProduct(product: exampleProducts[index])),
+                      (index) => ShowProduct(product: exampleProducts[index])),
                 ),
               ),
             )
           ],
         ),
-        SizedBox(height: contentSpacing,),
+        const SizedBox(
+          height: contentSpacing,
+        ),
+        Center(
+          child: SizedBox(
+            width: 1100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Expanded(
+                    child: FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: SizedBox(
+                            height: 670, width: 670, child: Placeholder()))),
+                const SizedBox(
+                  width: 50,
+                ),
+                Expanded(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'COLLECTION “Victorian Nobility” COMING SOON'
+                          .toUpperCase(),
+                      style: textTheme.headlineLarge,
+                    ),
+                    const Text(
+                        '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla'),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    PrimaryButton(
+                      text: "Sign up for early purchase".toUpperCase(),
+                      onTap: () {},
+                      outlined: true,
+                    )
+                  ],
+                )),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: contentSpacing,
+        ),
+        Center(
+          child: SizedBox(
+            width: 1400,
+            child: Column(
+              children: [
+                Text(
+                  "Collections".toUpperCase(),
+                  style: textTheme.headlineLarge,
+                ),
+                SizedBox(
+                  height: 36,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(
+                        3,
+                        (index) => Column(
+                              children: [
+                                Placeholder(),
+                                PrimaryButton(
+                                  text: "Noble Origins".toUpperCase(),
+                                  onTap: () {},
+                                  onlyUnderline: true,
+                                  outlined: true,
+                                  trailingIcon: Icons.chevron_right,
+                                )
+                              ],
+                            )))
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: contentSpacing,
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: kPagePadding),
           child: Row(
@@ -145,7 +237,7 @@ class Home extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset("lib/assets/images/bracelets/brace1.png"),
-                SizedBox(
+                const SizedBox(
                   width: 80,
                 ),
                 Flexible(

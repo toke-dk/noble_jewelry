@@ -8,15 +8,17 @@ class PrimaryButton extends StatefulWidget {
       required this.text,
       required this.onTap,
       this.outlined,
-      this.icon,
+      this.trailingIcon,
       this.customColors,
       this.onlyUnderline,
-      this.initUnderline})
+      this.initUnderline,
+      this.leadingIcon})
       : super(key: key);
   final String text;
   final Function() onTap;
   final bool? outlined;
-  final IconData? icon;
+  final IconData? trailingIcon;
+  final IconData? leadingIcon;
   final bool? onlyUnderline;
   final bool? initUnderline;
   final CustomPrimaryButtonDecoration? customColors;
@@ -48,7 +50,8 @@ class _PrimaryButtonState extends State<PrimaryButton> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    textColor = widget.customColors?.primaryForegroundColor ?? initForeGroundColor;
+    textColor =
+        widget.customColors?.primaryForegroundColor ?? initForeGroundColor;
   }
 
   void changeTextColor() {
@@ -117,12 +120,12 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    widget.icon != null
+                    widget.leadingIcon != null
                         ? Row(
                             children: [
                               Icon(
-                                widget.icon,
-                                color: foreGroundColor,
+                                widget.leadingIcon,
+                                color: textColor,
                               ),
                               const SizedBox(
                                 width: 8,
@@ -135,13 +138,27 @@ class _PrimaryButtonState extends State<PrimaryButton> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Text(
-                            widget.text,
-                            style: TextStyle(
-                                color: textColor,
-                                fontWeight: widget.initUnderline == true
-                                    ? FontWeight.bold
-                                    : null),
+                          Row(
+                            children: [
+                              Text(
+                                widget.text,
+                                style: TextStyle(
+                                    color: textColor,
+                                    fontWeight: widget.initUnderline == true
+                                        ? FontWeight.bold
+                                        : null),
+                              ),
+                              widget.trailingIcon != null
+                                  ? Row(
+                                      children: [
+                                        Icon(
+                                          widget.trailingIcon,
+                                          color: textColor,
+                                        ),
+                                      ],
+                                    )
+                                  : const SizedBox(),
+                            ],
                           ),
                           widget.onlyUnderline == true
                               ? Container(
