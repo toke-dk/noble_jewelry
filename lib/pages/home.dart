@@ -166,24 +166,24 @@ class Home extends StatelessWidget {
         ),
         Center(
             child: MultiColumn(
-              sections: [
-                MultiColumnSection(
-                    title: "Building a Strong Foundation through Valued Customers",
-                    bodyText:
+          sections: [
+            MultiColumnSection(
+                title: "Building a Strong Foundation through Valued Customers",
+                bodyText:
                     "Our success is thanks to our valued customers. This community continues to expand, creating a close-knit atmosphere akin to a small family. Our success is thanks to our valued customers. This community continues to expand, creating a close-knit atmosphere akin to a small family."),
-                MultiColumnSection(
-                    title: "Building a Close-Knit Community",
-                    bodyText:
+            MultiColumnSection(
+                title: "Building a Close-Knit Community",
+                bodyText:
                     "NOBLE has fostered a thriving community of like-minded individuals. As customers became part of our family, they discovered a space where bonds were forged and friendships flourished. Our community members share not only their love for our brand but also their passions, interests, and aspirations. Through engaging forums, events, and social media platforms, we have created a place where connections are nurtured, making our brand more than just a product, but an enriching lifestyle."),
-                MultiColumnSection(
-                    title: "Empowering Growth Together",
-                    bodyText:
+            MultiColumnSection(
+                title: "Empowering Growth Together",
+                bodyText:
                     "The synergy between our brand and our community has empowered us to grow and evolve together. We actively seek feedback and suggestions from our community members, valuing their insights as we shape the future of [Brand Name]. Their advocacy and word-of-mouth support have allowed us to expand our family, welcoming new customers who resonate with our shared values. Together, we forge ahead on a journey of growth and success, united by the spirit of community and mutual support"),
-              ],
-            )),
+          ],
+        )),
         Center(
           child: PrimaryButton(
-            text: "Be a part of the community".toUpperCase(),
+            text: "Become a part of the community".toUpperCase(),
             trailingIcon: Icons.chevron_right,
             onTap: () {},
             onlyUnderline: true,
@@ -193,7 +193,7 @@ class Home extends StatelessWidget {
         const SizedBox(
           height: contentSpacing,
         ),
-        
+
         Center(
           child: Container(
             child: Row(

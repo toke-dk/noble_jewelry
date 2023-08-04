@@ -42,15 +42,10 @@ class MultiColumnSection {
   MultiColumnSection({this.title, this.bodyText});
 }
 
-class MultiColumn extends StatefulWidget {
+class MultiColumn extends StatelessWidget {
   const MultiColumn({Key? key, required this.sections}) : super(key: key);
   final List<MultiColumnSection> sections;
 
-  @override
-  State<MultiColumn> createState() => _MultiColumnState();
-}
-
-class _MultiColumnState extends State<MultiColumn> {
   @override
   Widget build(BuildContext context) {
     return HoverScaleWidget(
@@ -58,8 +53,8 @@ class _MultiColumnState extends State<MultiColumn> {
         width: 1100,
         child: IntrinsicHeight(
           child: Row(
-            children: List.generate(widget.sections.length, (index) {
-              final currentSection = widget.sections[index];
+            children: List.generate(sections.length, (index) {
+              final currentSection = sections[index];
               return Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 2),
