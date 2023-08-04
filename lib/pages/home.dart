@@ -155,14 +155,15 @@ class Home extends StatelessWidget {
         ),
 
         /// COMMUNITY SECTION
-        Center(
-          child: Text(
-            "Community".toUpperCase(),
-            style: textTheme.headlineLarge,
+        PageTitleText(
+          titleText: "Community".toUpperCase(),
+          subWidget: PrimaryButton(
+            text: "Become a part of the community",
+            trailingIcon: Icons.chevron_right,
+            onTap: () {},
+            onlyUnderline: true,
+            outlined: true,
           ),
-        ),
-        const SizedBox(
-          height: 36,
         ),
         Center(
             child: MultiColumn(
@@ -181,6 +182,26 @@ class Home extends StatelessWidget {
                     "The synergy between our brand and our community has empowered us to grow and evolve together. We actively seek feedback and suggestions from our community members, valuing their insights as we shape the future of [Brand Name]. Their advocacy and word-of-mouth support have allowed us to expand our family, welcoming new customers who resonate with our shared values. Together, we forge ahead on a journey of growth and success, united by the spirit of community and mutual support"),
           ],
         )),
+        const SizedBox(
+          height: contentSpacing,
+        ),
+
+        /// NEW JOURNALS
+        PageTitleText(
+          titleText: "New Journals".toUpperCase(),
+          subWidget: PrimaryButton(
+            trailingIcon: Icons.chevron_right,
+            text: "View all articles",
+            onTap: () {},
+            onlyUnderline: true,
+            outlined: true,
+          ),
+        ),
+        Center(child: JournalsWidget(journals: placeHolderJournals)),
+        const SizedBox(
+          height: contentSpacing,
+        ),
+
         Center(
           child: PrimaryButton(
             text: "Become a part of the community".toUpperCase(),

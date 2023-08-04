@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:noble_jewelry/models/collections.dart';
 
 import '../models/product.dart';
+import '../widgets/sections.dart';
 
 const double kPagePadding = 100;
 
@@ -42,4 +43,31 @@ final List<Product> exampleProducts = [
       image: Image.asset("lib/assets/images/bracelets/brace5.png"),
       name: "g",
       priceUSD: 7),
+];
+
+final List<Journal> placeHolderJournals = [
+  Journal(date: DateTime.now(),
+      title: "Example Jounal That Should Be Read",
+      coverImage: Placeholder(),
+      theme: JournalThemes.people,
+      description: "This is a pure example"
+  ),
+  Journal(date: DateTime.now(),
+      title: "This Is Really Interesting",
+      coverImage: Placeholder(),
+      theme: JournalThemes.events,
+      description: "It really is",
+  ),
+  Journal(date: DateTime.now(),
+    title: "Oh You Should Read This",
+    coverImage: Placeholder(),
+    theme: JournalThemes.products,
+    description: "Super New Pruduct",
+  ),
+  Journal(date: DateTime.now(),
+    title: "Agaiiin",
+    coverImage: Placeholder(),
+    theme: JournalThemes.products,
+    description: "Ultra",
+  ),
 ];

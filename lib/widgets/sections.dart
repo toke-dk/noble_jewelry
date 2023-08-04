@@ -4,6 +4,115 @@ import 'package:noble_jewelry/shared/variables.dart';
 
 import '../shared/buttons.dart';
 
+class PageTitleText extends StatelessWidget {
+  const PageTitleText({Key? key, required this.titleText, this.subWidget})
+      : super(key: key);
+  final String titleText;
+  final Widget? subWidget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Center(
+          child: Text(
+            titleText,
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
+        ),
+        Center(
+          child: subWidget,
+        ),
+        const SizedBox(
+          height: 36,
+        ),
+      ],
+    );
+  }
+}
+
+enum JournalThemes { events, products, people }
+
+extension JournalThemesExtension on JournalThemes {
+  String get getStringName {
+    switch (this) {
+      case JournalThemes.products:
+        return "Products";
+      case JournalThemes.events:
+        return "Events";
+      case JournalThemes.people:
+        return "People";
+    }
+  }
+}
+
+class Journal {
+  final String title;
+  final Widget coverImage;
+  final JournalThemes theme;
+  final String description;
+  final DateTime date;
+
+  Journal(
+      {required this.date,
+      required this.title,
+      required this.coverImage,
+      required this.theme,
+      required this.description});
+}
+
+class JournalsWidget extends StatelessWidget {
+  const JournalsWidget({Key? key, required this.journals}) : super(key: key);
+
+  final List<Journal> journals;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 1100,
+      height: 350,
+      child: IntrinsicHeight(
+        child: Row(
+          children: List.generate(journals.length, (index) {
+            final Journal currentJournal = journals[index];
+            return Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AspectRatio(
+                      aspectRatio: 3 / 2,
+                      child: currentJournal.coverImage,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 9),
+                      child: Text(
+                        currentJournal.theme.getStringName.toUpperCase(),
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ),
+                    Container(
+                      height: 70,
+                      child: Text(
+                        currentJournal.title,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                    ),
+                    Text(
+                      currentJournal.description,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }),
+        ),
+      ),
+    );
+  }
+}
+
 class HoverScaleWidget extends StatefulWidget {
   const HoverScaleWidget({Key? key, required this.child, this.onTap})
       : super(key: key);
@@ -29,7 +138,7 @@ class _HoverScaleWidgetState extends State<HoverScaleWidget> {
       child: widget.child.animate(target: isHovering ? 1 : 0).scale(
           delay: kAnimationDelay,
           duration: kAnimationSpeed,
-          begin: Offset(1, 1),
+          begin: const Offset(1, 1),
           end: Offset(scaleFactor, scaleFactor)),
     );
   }
