@@ -14,34 +14,56 @@ class SubscribeToNewsLetter extends StatelessWidget {
       width: double.infinity,
       color: Theme.of(context).colorScheme.primary.withOpacity(0.04),
       child: Align(
-        child: SizedBox(
-          width: 1100,
+        child: Container(
+          width: 1250,
+          color: Colors.blue,
           child: IntrinsicHeight(
             child: Padding(
-              padding: const EdgeInsets.all(50),
+              padding: const EdgeInsets.symmetric(vertical: 50),
               child: Row(
                 children: [
-                  const SizedBox(
-                      width: 400,
-                      height: 49,
-                      child: PrimaryTextField(
-                          labelText: "Subscribe to our newsletter")),
-                  SizedBox(
-                    width: 60,
-                    height: 49,
-                    child: FittedBox(
-                      fit: BoxFit.fitHeight,
-                      child: PrimaryButton(
-                        text: "",
-                        onTap: () {},
-                        trailingIcon: Icons.chevron_right,
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      color: Colors.cyan,
+                      width: 575,
+                      margin: const EdgeInsets.only(right: 50),
+                      child: Column(
+                        children: [
+                          Text("Some tex"),
+                          Container(
+                            color: Colors.amber,
+                            width: 464,
+                            height: 49,
+                            margin: EdgeInsets.only(right: 111),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: PrimaryTextField(
+                                      labelText: "Subscribe to our newsletter"),
+                                ),
+                                FittedBox(
+                                  fit: BoxFit.fitHeight,
+                                  child: PrimaryButton(
+                                    text: "",
+                                    onTap: () {},
+                                    trailingIcon: Icons.chevron_right,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
+                  
                   VerticalDivider(
-                    width: 100,
                   ),
-                  Expanded(child: Text("data")),
+                  Expanded(child: Padding(
+                    padding: const EdgeInsets.only(left: 50),
+                    child: Text("data"),
+                  )),
                 ],
               ),
             ),
