@@ -18,15 +18,6 @@ class Home extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
-        /// SUBSCRIBE TO NEWSLETTER
-        const Center(
-          child: SubscribeToNewsLetter(),
-        ),
-        const SizedBox(
-          height: contentSpacing,
-        ),
-        
         /// TOPBANNER
         SizedBox(
             height: 720,
@@ -207,6 +198,14 @@ class Home extends StatelessWidget {
           ),
         ),
         Center(child: JournalsWidget(journals: placeHolderJournals)),
+        const SizedBox(
+          height: contentSpacing,
+        ),
+
+        /// SUBSCRIBE TO NEWSLETTER
+        const Center(
+          child: SubscribeToNewsLetter(),
+        ),
         const SizedBox(
           height: contentSpacing,
         ),

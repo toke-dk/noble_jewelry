@@ -10,13 +10,13 @@ class SubscribeToNewsLetter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(Theme.of(context).textTheme.bodySmall!.color);
     return Container(
       width: double.infinity,
       color: Theme.of(context).colorScheme.primary.withOpacity(0.04),
       child: Align(
         child: Container(
           width: 1250,
-          color: Colors.blue,
           child: IntrinsicHeight(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 50),
@@ -25,20 +25,30 @@ class SubscribeToNewsLetter extends StatelessWidget {
                   Align(
                     alignment: Alignment.center,
                     child: Container(
-                      color: Colors.cyan,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Some tex"),
+                          Text(
+                            "Subscribe to our newsletter".toUpperCase(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall!
+                                .copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                          ),
+                          SizedBox(
+                            height: 22,
+                          ),
                           Container(
-                            color: Colors.amber,
                             width: 464,
                             height: 49,
                             margin: const EdgeInsets.only(right: 111),
                             child: Row(
                               children: [
                                 const Expanded(
-                                  child: PrimaryTextField(
-                                      labelText: "Subscribe to our newsletter"),
+                                  child:
+                                      PrimaryTextField(labelText: "Your Email"),
                                 ),
                                 FittedBox(
                                   fit: BoxFit.fitHeight,
@@ -55,13 +65,36 @@ class SubscribeToNewsLetter extends StatelessWidget {
                       ),
                     ),
                   ),
-                  
                   const VerticalDivider(
                     width: 100,
                   ),
-                  Expanded(child: Container(
-                    color: Colors.amber,
-                    child: const Text("data"),
+                  Expanded(
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Follow us".toUpperCase(),
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: Theme.of(context).colorScheme.primary),
+                      ),
+                      SizedBox(
+                        height: 22,
+                      ),
+                      Container(
+                        width: 464,
+                        height: 49,
+                        child: Row(
+                          children: List.generate(
+                              4,
+                              (index) => Padding(
+                                padding: EdgeInsets.only(left: index!= 0 ? 12 : 0),
+                                child: FittedBox(
+                                    fit: BoxFit.fitHeight,
+                                    child: Placeholder()),
+                              )),
+                        ),
+                      ),
+                    ],
                   )),
                 ],
               ),
