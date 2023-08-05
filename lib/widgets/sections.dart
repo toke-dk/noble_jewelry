@@ -59,9 +59,12 @@ class SubscribeToNewsLetter extends StatelessWidget {
                   ),
                   
                   VerticalDivider(
+                    width: 0,
                   ),
-                  Expanded(child: Padding(
-                    padding: const EdgeInsets.only(left: 50),
+                  Expanded(child: Container(
+                    color: Colors.amber,
+                    width: 464,
+                    margin: const EdgeInsets.only(left: 50),
                     child: Text("data"),
                   )),
                 ],
