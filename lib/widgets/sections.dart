@@ -26,19 +26,17 @@ class SubscribeToNewsLetter extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Container(
                       color: Colors.cyan,
-                      width: 575,
-                      margin: const EdgeInsets.only(right: 50),
                       child: Column(
                         children: [
-                          Text("Some tex"),
+                          const Text("Some tex"),
                           Container(
                             color: Colors.amber,
                             width: 464,
                             height: 49,
-                            margin: EdgeInsets.only(right: 111),
+                            margin: const EdgeInsets.only(right: 111),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   child: PrimaryTextField(
                                       labelText: "Subscribe to our newsletter"),
                                 ),
@@ -58,14 +56,12 @@ class SubscribeToNewsLetter extends StatelessWidget {
                     ),
                   ),
                   
-                  VerticalDivider(
-                    width: 0,
+                  const VerticalDivider(
+                    width: 100,
                   ),
                   Expanded(child: Container(
                     color: Colors.amber,
-                    width: 464,
-                    margin: const EdgeInsets.only(left: 50),
-                    child: Text("data"),
+                    child: const Text("data"),
                   )),
                 ],
               ),
