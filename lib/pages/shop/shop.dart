@@ -12,11 +12,11 @@ class Shop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: 1600,
       child: Column(
         children: [
-          TopPageTitle(
+          const TopPageTitle(
               headlineSmall: "Shop", headlineLarge: "Best Quality Bracelets"),
           const SizedBox(
             height: 25,
@@ -48,8 +48,7 @@ class Shop extends StatelessWidget {
           const Divider(
             height: 50,
           ),
-          SizedBox(
-              width: 1600, child: ShowItemsInShop(products: exampleProducts))
+          ShowItemsInShop(products: exampleProducts)
         ],
       ),
     );
