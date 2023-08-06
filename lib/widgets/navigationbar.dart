@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 import '../models/pageProvider.dart';
 
 class MyNavigationBar extends StatelessWidget {
-  const MyNavigationBar({Key? key, required this.allPages}) : super(key: key);
-  final List<Pages> allPages;
+  const MyNavigationBar({Key? key, required this.menuPages}) : super(key: key);
+  final List<Pages> menuPages;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,9 @@ class MyNavigationBar extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          const Positioned(
+          Positioned(
             left: 0,
-            child: Menu(),
+            child: Menu(menuPages: menuPages,),
           ),
           Positioned(
             right: 0,
@@ -55,14 +55,15 @@ class MyNavigationBar extends StatelessWidget {
 class Menu extends StatefulWidget {
   const Menu({
     Key? key,
+    required this.menuPages,
   }) : super(key: key);
+  final List<Pages> menuPages;
 
   @override
   State<Menu> createState() => _MenuState();
 }
 
 class _MenuState extends State<Menu> {
-  List<Pages> allPages = Pages.values;
 
   Pages? currentHoveredItem;
 
@@ -76,17 +77,17 @@ class _MenuState extends State<Menu> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: List.generate(allPages.length, (index) {
-        Pages currentIndexPage = allPages[index];
-          return PrimaryButton(
-            text: currentIndexPage.getName.toUpperCase(),
-            onTap: () => setState((){setCurrentPage(context, currentIndexPage);}),
-            outlined: true,
-            initUnderline: getCurrentPage(context) == currentIndexPage,
-            onlyUnderline: true,
-          );
-
-
+      children: List.generate(widget.menuPages.length, (index) {
+        Pages currentIndexPage = widget.menuPages[index];
+        return PrimaryButton(
+          text: currentIndexPage.getName.toUpperCase(),
+          onTap: () => setState(() {
+            setCurrentPage(context, currentIndexPage);
+          }),
+          outlined: true,
+          initUnderline: getCurrentPage(context) == currentIndexPage,
+          onlyUnderline: true,
+        );
       }),
     );
   }

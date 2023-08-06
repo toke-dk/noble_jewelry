@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:noble_jewelry/models/collections.dart';
+import 'package:noble_jewelry/models/pageProvider.dart';
 import 'package:noble_jewelry/shared/number_convert.dart';
+import 'package:provider/provider.dart';
 
 import '../models/product.dart';
 import '../shared/buttons.dart';
 
 class ShowProduct extends StatefulWidget {
-  const ShowProduct({Key? key, required this.product, this.alignment}) : super(key: key);
+  const ShowProduct(
+      {Key? key, required this.product, this.alignment, this.onProductTap})
+      : super(key: key);
   final Product product;
   final Alignment? alignment;
+  final Function(Product)? onProductTap;
 
   @override
   State<ShowProduct> createState() => _ShowProductState();
@@ -115,9 +120,11 @@ class _ShowProductState extends State<ShowProduct> {
                     ),
                     PrimaryButton(
                       outlined: true,
-                      leadingIcon: Icons.shopping_basket,
                       text: 'Discover'.toUpperCase(),
-                      onTap: () {},
+                      onTap: () {
+                        Provider.of<PageProvider>(context, listen: false)
+                            .setCurrentPage(Pages.productDetails);
+                      },
                     ),
                   ],
                 ),

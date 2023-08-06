@@ -33,7 +33,9 @@ class MainApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
-          fontFamily: GoogleFonts.hind().fontFamily,
+          fontFamily: GoogleFonts
+              .hind()
+              .fontFamily,
           textTheme: const TextTheme(
             bodyMedium: TextStyle(
                 letterSpacing: 1.5, fontSize: 16, fontWeight: FontWeight.w100),
@@ -70,7 +72,13 @@ class _ContentState extends State<Content> {
     super.initState();
   }
 
-  final List<Pages> allItems = Pages.values.map((e) => e).toList();
+  final List<Pages> menuPages = [
+    Pages.home,
+    Pages.shop,
+    Pages.about,
+    Pages.stories,
+    Pages.contactUs
+  ];
 
   int currentIndex = 0;
 
@@ -80,7 +88,7 @@ class _ContentState extends State<Content> {
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(150),
             child: MyNavigationBar(
-              allPages: allItems,
+              menuPages: menuPages,
             )),
         body: FooterView(
           footer: Footer(
@@ -93,17 +101,26 @@ class _ContentState extends State<Content> {
                   Text(
                     "FOLOW US",
                     style: TextStyle(
-                        color: Theme.of(context).colorScheme.onPrimary),
+                        color: Theme
+                            .of(context)
+                            .colorScheme
+                            .onPrimary),
                   ),
                   Text(
                     "home | about | contact".toUpperCase(),
                     style: TextStyle(
-                        color: Theme.of(context).colorScheme.onPrimary),
+                        color: Theme
+                            .of(context)
+                            .colorScheme
+                            .onPrimary),
                   ),
                   Text(
                     "@2023 Noble - Men’s fashion bracelets",
                     style: TextStyle(
-                        color: Theme.of(context).colorScheme.tertiary),
+                        color: Theme
+                            .of(context)
+                            .colorScheme
+                            .tertiary),
                   )
                 ],
               ),
@@ -112,7 +129,10 @@ class _ContentState extends State<Content> {
           children: [
             Align(
                 alignment: Alignment.center,
-                child: Provider.of<PageProvider>(context).currentPage.showPage),
+                child: Provider
+                    .of<PageProvider>(context)
+                    .currentPage
+                    .showPage),
           ],
         ));
   }
