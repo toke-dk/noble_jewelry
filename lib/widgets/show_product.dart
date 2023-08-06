@@ -6,8 +6,9 @@ import '../models/product.dart';
 import '../shared/buttons.dart';
 
 class ShowProduct extends StatefulWidget {
-  const ShowProduct({Key? key, required this.product}) : super(key: key);
+  const ShowProduct({Key? key, required this.product, this.alignment}) : super(key: key);
   final Product product;
+  final Alignment? alignment;
 
   @override
   State<ShowProduct> createState() => _ShowProductState();
@@ -16,7 +17,8 @@ class ShowProduct extends StatefulWidget {
 class _ShowProductState extends State<ShowProduct> {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Align(
+      alignment: widget.alignment ?? Alignment.center,
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(5)),

@@ -3,7 +3,7 @@ import 'package:noble_jewelry/pages/about.dart';
 import 'package:noble_jewelry/pages/stories.dart';
 import 'package:noble_jewelry/pages/contact.dart';
 import 'package:noble_jewelry/pages/home.dart';
-import 'package:noble_jewelry/pages/shop.dart';
+import 'package:noble_jewelry/pages/shop/shop.dart';
 
 enum Pages { home, shop, about, stories, contactUs }
 
@@ -41,7 +41,7 @@ extension MenuItemsNavigator on Pages {
 
 class PageProvider extends ChangeNotifier {
   /// TODO change this in production
-  Pages _currentPage = Pages.home;
+  Pages _currentPage = Pages.shop;
 
   Pages get currentPage => _currentPage;
 

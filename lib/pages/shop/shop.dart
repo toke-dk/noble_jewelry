@@ -1,25 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:noble_jewelry/pages/shop/show_items_in_shop.dart';
 import 'package:noble_jewelry/shared/buttons.dart';
 import 'package:noble_jewelry/shared/variables.dart';
 import 'package:noble_jewelry/widgets/top_page_title.dart';
 
-import '../widgets/show_product.dart';
+import '../../widgets/show_product.dart';
 
 class Shop extends StatelessWidget {
   const Shop({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kPagePadding),
+    return SizedBox(
+      width: 1600,
       child: Column(
         children: [
-          TopPageTitle(headlineSmall: "Shop", headlineLarge: "Best Quality Bracelets"),
+          TopPageTitle(
+              headlineSmall: "Shop", headlineLarge: "Best Quality Bracelets"),
           const SizedBox(
             height: 25,
           ),
-          const Divider(height: 50,),
+          const Divider(
+            height: 50,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -33,17 +37,19 @@ class Shop extends StatelessWidget {
                       TextSpan(text: "Products")
                     ]),
               ),
-              PrimaryButton(text: "Filter", onTap: () {}, trailingIcon: Icons.tune, outlined: true,),
+              PrimaryButton(
+                text: "Filter",
+                onTap: () {},
+                trailingIcon: Icons.tune,
+                outlined: true,
+              ),
             ],
           ),
-          const Divider(height: 50,),
-          GridView.count(
-            shrinkWrap: true,
-            childAspectRatio: (1 / 1.4),
-            crossAxisCount: 4,
-            children: List.generate(exampleProducts.length,
-                (index) => ShowProduct(product: exampleProducts[index])),
-          )
+          const Divider(
+            height: 50,
+          ),
+          SizedBox(
+              width: 1600, child: ShowItemsInShop(products: exampleProducts))
         ],
       ),
     );
