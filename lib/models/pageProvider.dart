@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:noble_jewelry/models/product.dart';
 import 'package:noble_jewelry/pages/about.dart';
-import 'package:noble_jewelry/pages/product_details.dart';
+import 'package:noble_jewelry/pages/product_details/product_details.dart';
 import 'package:noble_jewelry/pages/stories.dart';
 import 'package:noble_jewelry/pages/contact.dart';
 import 'package:noble_jewelry/pages/home.dart';
@@ -46,7 +47,7 @@ extension MenuItemsNavigator on Pages {
 
 class PageProvider extends ChangeNotifier {
   /// TODO change this in production
-  Pages _currentPage = Pages.shop;
+  Pages _currentPage = Pages.productDetails;
 
   Pages get currentPage => _currentPage;
 
