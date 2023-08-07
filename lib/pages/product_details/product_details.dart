@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:noble_jewelry/pages/product_details/product_section.dart';
+import 'package:noble_jewelry/pages/product_details/product_details_sections.dart';
 import 'package:noble_jewelry/shared/variables.dart';
 
 import '../../models/product.dart';
@@ -10,12 +10,16 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(
-          child: ProductSection(product: product ?? exampleProducts[0],),
-        )
-      ],
+    return IntrinsicWidth(
+      child: Column(
+        children: [
+          Center(
+            child: ProductSection(product: product ?? exampleProducts[0],),
+          ),
+          Divider(height: 100,),
+          InfoDetailsSection()
+        ],
+      ),
     );
   }
 }

@@ -45,6 +45,25 @@ class ProductSection extends StatelessWidget {
   }
 }
 
+class InfoDetailsSection extends StatelessWidget {
+  const InfoDetailsSection({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 1200,
+      child: Row(
+        children: [
+          Text("Description".toUpperCase()),
+          Spacer(),
+          Expanded(child: Container(color:Colors.amber,child: Text("Features"))),
+        ],
+      ),
+    );
+  }
+}
+
+
 class _ShowImages extends StatelessWidget {
   const _ShowImages({Key? key, required this.images}) : super(key: key);
   final List<Widget> images;
