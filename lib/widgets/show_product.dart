@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:noble_jewelry/models/collections.dart';
 import 'package:noble_jewelry/models/pageProvider.dart';
 import 'package:noble_jewelry/shared/number_convert.dart';
+import 'package:noble_jewelry/widgets/sections.dart';
 import 'package:provider/provider.dart';
 
 import '../models/product.dart';
@@ -82,7 +83,7 @@ class _ShowProductState extends State<ShowProduct> {
                             ),
                           )
                         : const SizedBox(),
-                    widget.product.image,
+                    HoverScaleWidget(start: 0.8, scaleFactor: 1, child: widget.product.image),
                     const SizedBox(
                       height: 20,
                     ),

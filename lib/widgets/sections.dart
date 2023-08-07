@@ -216,9 +216,11 @@ class JournalsWidget extends StatelessWidget {
 }
 
 class HoverScaleWidget extends StatefulWidget {
-  const HoverScaleWidget({Key? key, required this.child, this.onTap})
+  const HoverScaleWidget({Key? key, required this.child, this.onTap, this.start, this.scaleFactor})
       : super(key: key);
   final Widget child;
+  final double? start;
+  final double? scaleFactor;
   final Function()? onTap;
 
   @override
@@ -227,7 +229,7 @@ class HoverScaleWidget extends StatefulWidget {
 
 class _HoverScaleWidgetState extends State<HoverScaleWidget> {
   bool isHovering = false;
-  final double scaleFactor = 1.007;
+  late final double scaleFactor = widget.scaleFactor ?? 1.007;
 
   @override
   Widget build(BuildContext context) {
@@ -240,7 +242,7 @@ class _HoverScaleWidgetState extends State<HoverScaleWidget> {
       child: widget.child.animate(target: isHovering ? 1 : 0).scale(
           delay: kAnimationDelay,
           duration: kAnimationSpeed,
-          begin: const Offset(1, 1),
+          begin: Offset(widget.start ?? 1, widget.start ?? 1),
           end: Offset(scaleFactor, scaleFactor)),
     );
   }
