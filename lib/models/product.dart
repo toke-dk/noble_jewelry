@@ -12,7 +12,7 @@ extension LabelsExtension on Labels {
       case Labels.sale:
         return "Sale";
       case Labels.soldOut:
-        return"Sould Out";
+        return "Sould Out";
     }
   }
 }
@@ -26,8 +26,10 @@ class Product {
   final int? amountInStock;
   final int? totalAmountSold;
   final Labels? label;
+  final double? size;
 
   Product({
+    this.size,
     this.label,
     required this.image,
     required this.name,
@@ -40,6 +42,7 @@ class Product {
 
   double get calculateDiscount => (priceUSD - oldPriceUSD!) / oldPriceUSD!;
 }
+
 extension ProductsListExtension on List<Product> {
   /// Todo: make this function
   List<Product> get calculateNBestSellingProducts {

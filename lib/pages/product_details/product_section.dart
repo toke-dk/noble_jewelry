@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:noble_jewelry/models/collections.dart';
 import 'package:noble_jewelry/models/product.dart';
+import 'package:noble_jewelry/shared/buttons.dart';
+import 'package:noble_jewelry/shared/textfield.dart';
 
 class ProductSection extends StatelessWidget {
   const ProductSection({Key? key, required this.product}) : super(key: key);
@@ -13,17 +16,29 @@ class ProductSection extends StatelessWidget {
       child: Row(
         children: [
           const _ShowImages(
-            images: [Placeholder(), Placeholder(), Placeholder(), Placeholder()],
+            images: [
+              Placeholder(),
+              Placeholder(),
+              Placeholder(),
+              Placeholder()
+            ],
           ),
-          const Spacer(flex: 3,),
+          const Spacer(
+            flex: 3,
+          ),
           Container(
-            height: 825,
-            color: Colors.red,
+              height: 825,
               width: 600,
-              child: const Placeholder()),
-          const Spacer(flex: 10,),
-          _ShowDetails(product: product,),
-          const Spacer(flex: 10,),
+              child: product.image),
+          const Spacer(
+            flex: 10,
+          ),
+          _ShowDetails(
+            product: product,
+          ),
+          const Spacer(
+            flex: 10,
+          ),
         ],
       ),
     );
@@ -57,15 +72,56 @@ class _ShowDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    return SizedBox(
       width: 400,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              
+              Text(
+                product.collections?.getName ?? "Exclusive Leak".toUpperCase(),
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall!
+                    .copyWith(color: Colors.grey[600]),
+              ),
+              PrimaryButton(
+                text: "",
+                onTap: () {},
+                onlyUnderline: true,
+                outlined: true,
+                trailingIcon: Icons.favorite_outline_sharp,
+              ),
             ],
-          )
+          ),
+          Text(
+            product.name,
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          RichText(
+              text: TextSpan(children: [
+            TextSpan(text: "Size: "),
+            TextSpan(
+                text: product.size?.toString() ?? "One Size".toUpperCase(),
+                style: TextStyle(fontWeight: FontWeight.bold))
+          ])),
+          SizedBox(
+            height: 20,
+          ),
+          Text("Quantity".toUpperCase()),
+          MyInputQuantity(),
+          SizedBox(
+            height: 20,
+          ),
+          SizedBox(
+            width: double.infinity,
+              child:
+                  PrimaryButton(text: "Ad To Cart".toUpperCase(), onTap: () {}))
         ],
       ),
     );
