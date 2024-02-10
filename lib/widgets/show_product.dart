@@ -94,28 +94,7 @@ class _ShowProductState extends State<ShowProduct> {
                     const SizedBox(
                       height: 8,
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          widget.product.priceUSD.convertDoublePriceToString,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                        const SizedBox(
-                          width: 4,
-                        ),
-                        widget.product.oldPriceUSD != null
-                            ? Text(
-                                widget.product.oldPriceUSD!
-                                    .convertDoublePriceToString,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(
-                                        decoration: TextDecoration.lineThrough),
-                              )
-                            : const SizedBox(),
-                      ],
-                    ),
+                    DisplayProductPrice(product: widget.product),
                     const SizedBox(
                       height: 8,
                     ),
@@ -134,6 +113,33 @@ class _ShowProductState extends State<ShowProduct> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class DisplayProductPrice extends StatelessWidget {
+  const DisplayProductPrice({Key? key, required this.product}) : super(key: key);
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          product.priceUSD.convertDoublePriceToString,
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+        const SizedBox(
+          width: 4,
+        ),
+        product.oldPriceUSD != null
+            ? Text(
+          product.oldPriceUSD!
+              .convertDoublePriceToString,
+          style: TextStyle(color: Colors.grey[700], decoration: TextDecoration.lineThrough),
+        )
+            : const SizedBox(),
+      ],
     );
   }
 }

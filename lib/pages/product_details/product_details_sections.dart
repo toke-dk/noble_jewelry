@@ -3,6 +3,7 @@ import 'package:noble_jewelry/models/collections.dart';
 import 'package:noble_jewelry/models/product.dart';
 import 'package:noble_jewelry/shared/buttons.dart';
 import 'package:noble_jewelry/shared/textfield.dart';
+import 'package:noble_jewelry/widgets/show_product.dart';
 
 class ProductSection extends StatelessWidget {
   const ProductSection({Key? key, required this.product}) : super(key: key);
@@ -26,10 +27,7 @@ class ProductSection extends StatelessWidget {
           const Spacer(
             flex: 3,
           ),
-          Container(
-              height: 825,
-              width: 600,
-              child: product.image),
+          Container(height: 825, width: 600, child: product.image),
           const Spacer(
             flex: 10,
           ),
@@ -46,23 +44,75 @@ class ProductSection extends StatelessWidget {
 }
 
 class InfoDetailsSection extends StatelessWidget {
-  const InfoDetailsSection({Key? key}) : super(key: key);
+  const InfoDetailsSection({Key? key, required this.product}) : super(key: key);
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return SizedBox(
       width: 1200,
       child: Row(
         children: [
-          Text("Description".toUpperCase()),
-          Spacer(),
-          Expanded(child: Container(color:Colors.amber,child: Text("Features"))),
+          product.description != null
+              ? Column(
+                  children: [
+                    Text(
+                      "Description".toUpperCase(),
+                      style: theme.textTheme.headlineSmall,
+                    ),
+                    Text(product.description!)
+                  ],
+                )
+              : const SizedBox.shrink(),
+          const Spacer(),
+          const Expanded(child: _Details()),
         ],
       ),
     );
   }
 }
 
+class _Details extends StatelessWidget {
+  const _Details({Key? key}) : super(key: key);
+  final double dividerHeight = 80;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Divider(height: dividerHeight,),
+        Text(
+          "Features".toUpperCase(),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        RichText(
+            text: TextSpan(children: [
+              const TextSpan(
+                  text: "Material: ", style: TextStyle(fontWeight: FontWeight.bold)),
+              ...List.generate(1, (index) => const TextSpan(text: "Stainless steel"))
+            ])),
+        Divider(height: dividerHeight,),
+        Text(
+          "Size".toUpperCase(),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        RichText(
+            text: TextSpan(children: [
+          const TextSpan(
+              text: "Length: ", style: TextStyle(fontWeight: FontWeight.bold)),
+          ...List.generate(2, (index) => const TextSpan(text: "130mm (S), "))
+        ])),
+        Divider(height: dividerHeight,),
+      ],
+    );
+  }
+}
 
 class _ShowImages extends StatelessWidget {
   const _ShowImages({Key? key, required this.images}) : super(key: key);
@@ -115,30 +165,31 @@ class _ShowDetails extends StatelessWidget {
               ),
             ],
           ),
+          DisplayProductPrice(product: product,),
           Text(
             product.name,
             style: Theme.of(context).textTheme.headlineLarge,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           RichText(
               text: TextSpan(children: [
-            TextSpan(text: "Size: "),
+            const TextSpan(text: "Size: "),
             TextSpan(
                 text: product.size?.toString() ?? "One Size".toUpperCase(),
-                style: TextStyle(fontWeight: FontWeight.bold))
+                style: const TextStyle(fontWeight: FontWeight.bold))
           ])),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Text("Quantity".toUpperCase()),
-          MyInputQuantity(),
-          SizedBox(
+          const MyInputQuantity(),
+          const SizedBox(
             height: 20,
           ),
           SizedBox(
-            width: double.infinity,
+              width: double.infinity,
               child:
                   PrimaryButton(text: "Ad To Cart".toUpperCase(), onTap: () {}))
         ],

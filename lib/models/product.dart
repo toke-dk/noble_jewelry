@@ -27,8 +27,10 @@ class Product {
   final int? totalAmountSold;
   final Labels? label;
   final double? size;
+  final String? description;
 
   Product({
+    this.description,
     this.size,
     this.label,
     required this.image,
