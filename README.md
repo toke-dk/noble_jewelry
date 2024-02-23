@@ -1,6 +1,6 @@
-# noble_jewelry
+# Noble Jewelry
 
-Ecommerce website
+Ecommerce website made with flutter
 
 ## Images
 
